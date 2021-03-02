@@ -5,8 +5,8 @@
     "blogs": {},
     "articles": {},
     "egaTheme": {
-        "sapo-theme-<tên-theme-snake-case>": {
-            "name": "sapo-theme-<tên-theme-snake-case>",
+        "sapo-theme-zendo": {
+            "name": "sapo-theme-zendo",
             "version": "v1.0.0"
         }
     }

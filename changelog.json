@@ -1,6 +1,11 @@
 {
     "name": "sapo-theme-zendo",
     "versions": {
+        "v1.1.0": [
+            "templates/product.bwt",
+            "snippets/product_grid_office.bwt",
+            "configs/settings_schema.json"
+        ],
       "v1.0.0": []
     }
   }

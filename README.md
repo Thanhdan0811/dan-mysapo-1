@@ -2,7 +2,7 @@
     nguyen-thanh-dan.mysapo.net dùng zendo theme của sapo
 
 ## Giới thiệu :
-    theme được dùng để test các chức năng cơ bản
+            theme được dùng để test các chức năng cơ bản
 
 ## Cài đặt thiết lập 
 ...Tải về trên store

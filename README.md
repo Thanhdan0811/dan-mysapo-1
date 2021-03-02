@@ -9,7 +9,7 @@ theme được dùng để test các chức năng cơ bản
 
 ## Tính năng và những việc đã làm
 - Thay đổi giao diện trang bán hàng, tạo menu đa cấp.
---- Tạo đơn hàng như user và trong admin, thực hiện xử lý đơn hàng.
+-Tạo đơn hàng như user và trong admin, thực hiện xử lý đơn hàng.
 - Các tính năng thực hiện :
 1. Gắn sticker giao hàng nhanh 24h vào các sản phẩm có tag là giaonhanh24h
 2. Gắn hình ảnh FREESHIP vào các sản phẩm có trong collection freeship

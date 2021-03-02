@@ -1,0 +1,13 @@
+{
+    "version": "1",
+    "packages": {},
+    "pages": {},
+    "blogs": {},
+    "articles": {},
+    "egaTheme": {
+        "sapo-theme-<tên-theme-snake-case>": {
+            "name": "sapo-theme-<tên-theme-snake-case>",
+            "version": "v1.0.0"
+        }
+    }
+}

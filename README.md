@@ -1,5 +1,5 @@
 # Tên theme : 
-    https://nguyen-thanh-dan.mysapo.net/ dùng zendo theme của sapo
+https://nguyen-thanh-dan.mysapo.net/ dùng zendo theme của sapo
     
 ## Giới thiệu :
     theme được dùng để test các chức năng cơ bản

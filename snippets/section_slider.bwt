@@ -1,24 +1,48 @@
-<div class="section_slider clearfix">
-	<div class="home-slider">
-		{%for s2 in (1..5)%}
-		{%capture enable_slide-%}slider_{{s2}}_enable{%endcapture%}
-		{%capture naviimage-%}slider_{{s2}}.jpg{%endcapture%}
-		{%capture url-%}slider_{{s2}}_url{%endcapture%}
-		{%capture alt-%}slider_{{s2}}_alt{%endcapture%}
-		{%if settings[enable_slide]%}
-		<div class="items">
-			<a href="{{ settings[url]}}" title="{{ settings[alt] }}">
+<div class="section_slider swiper-container">
+	<div class="swiper-wrapper">
+		{%for i in (1..5)%}
+		{%capture enable%}slider_{{i}}_enable{%endcapture%}
+		{%capture image%}slider_{{i}}.jpg{%endcapture%}
+		{%capture url%}slider_{{i}}_url{%endcapture%}
+		{%capture alt%}slider_{{i}}_alt{%endcapture%}
+		{%if settings[enable]%}
+		<div class="swiper-slide">
+			<a href="{{ settings[url]}}" class="clearfix" title="{{ settings[alt]}}">
 				<picture>
-					<source media="(max-width: 480px)" srcset="{{ naviimage | asset_url | img_url:'large' }}">
-					<source media="(min-width: 481px) and (max-width: 600px)" srcset="{{ naviimage | asset_url }}">
-					<source media="(min-width: 601px) and (max-width: 1023px)" srcset="{{ naviimage | asset_url }}">
-					<source media="(min-width: 1024px) and (max-width: 1199px)" srcset="{{ naviimage | asset_url  }}">
-					<source media="(min-width: 1200px)" srcset="{{ naviimage | asset_url  }}">
-					<img class="lazyload" src="{{ naviimage | asset_url  }}" alt="{{ settings[alt] }}"/>
+					<source 
+							media="(min-width: 1200px)"
+							srcset="{{ image | asset_url }}">
+					<source 
+							media="(min-width: 992px)"
+							srcset="{{ image | asset_url }}">
+					<source 
+							media="(min-width: 569px)"
+							srcset="{{ image | asset_url }}">
+					<source 
+							media="(max-width: 480px)"
+							srcset="{{ image | asset_url | img_url:'large' }}">
+					<img 
+						 src="{{ image | asset_url | img_url:'grande' }}" 
+						 alt="{{ settings[alt]}}" class="img-responsive center-block" />
 				</picture>
 			</a>
 		</div>
 		{%endif%}
 		{%endfor%}
 	</div>
+	{%comment%}
+	<div class="swiper-pagination"></div>
+	{%endcomment%}
 </div>
+<script>
+	var swiper = new Swiper('.section_slider', {
+		autoplay: {
+			delay: 4500,
+			disableOnInteraction: false
+		},
+		pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+		}
+	});
+</script>

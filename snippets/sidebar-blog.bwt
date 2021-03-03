@@ -11,14 +11,14 @@
 					<a href="{{ link.url }}" class="nav-link {% if link.active %}active{% endif %}">
 						{{ link.title }}
 					</a>
-					<i class="fa fa-caret-down"></i>
+					<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fa-plus svg-inline--fa fa-caret-down fa-w-10"><path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z" class=""></path></svg>
 					<ul class="dropdown-menu">
 						{% for childlink in linklists[link.alias].links %}
 						{% if linklists[childlink.alias] %}
 						<li class="dropdown-submenu nav-item">
 							<a class="nav-link" href="{{ childlink.url }}">{{ childlink.title }}
 							</a>
-							<i class="fa fa-caret-down"></i>
+							<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fa-plus svg-inline--fa fa-caret-down fa-w-10"><path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z" class=""></path></svg>
 							<ul class="dropdown-menu">
 								{% for childlink2 in linklists[childlink.alias].links %}
 								<li class="nav-item lv3">

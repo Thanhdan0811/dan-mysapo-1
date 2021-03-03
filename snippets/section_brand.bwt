@@ -1,12 +1,12 @@
 <section class="section_brand">
-	<div class="container">
-		<div class="owlbrand">
+	<div class="container swiper_brand swiper-container">
+		<div class="swiper-wrapper">
 			{%for i in (1..6)%}
 			{%capture brandenable%}brand_{{i}}_en{%endcapture%}
 			{%capture imagebrand%}brand_{{i}}.png{%endcapture%}
 			{%capture altbrand%}brand_{{i}}_title{%endcapture%}
 			{%if settings[brandenable]%}
-			<div class="item">
+			<div class="item swiper-slide">
 				<img class="lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{imagebrand | asset_url}}" alt="{{altbrand}}"/>
 			</div>
 			{%endif%}
@@ -14,3 +14,37 @@
 		</div>
 	</div>
 </section>
+
+<script>
+	var swiper = new Swiper('.swiper_brand', {
+		slidesPerView: 6,
+		spaceBetween: 15,
+		slidesPerGroup: 2,
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+		breakpoints: {
+			300: {
+				slidesPerView: 2,
+				spaceBetween: 7
+			},
+			500: {
+				slidesPerView: 3,
+				spaceBetween: 10
+			},
+			640: {
+				slidesPerView: 4,
+				spaceBetween: 10
+			},
+			768: {
+				slidesPerView: 5,
+				spaceBetween: 15
+			},
+			1024: {
+				slidesPerView: 6,
+				spaceBetween: 15
+			}
+		}
+	});
+</script>

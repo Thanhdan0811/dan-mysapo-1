@@ -77,6 +77,9 @@
 		<a class="image_thumb" href="{{ product.url }}" title="{{ product.name }}">
 			<img class="lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"  data-src="{{ product.featured_image.src | img_url:'large' }}" alt="{{ product.name }}">
 		</a>
+		{%if on_sale == true and contact == 'false'%}
+		<span class="smart">-{{discount}}</span>
+		{%endif%}
 		<div class="product-action">
 			<div class="group_action">
 				{%if variantCount > 1 %}
@@ -88,8 +91,8 @@
 				{% elsif sold_out %}
 				{% else %}
 				<input type="hidden" name="variantId" value="{{ product.variants[0].id }}" />
-				<button class="hidden-xs btn-buy btn-cart btn-left btn btn-views left-to add_to_cart active {%if contact and variantCount == 1%} hidden{%endif%}" title="Thêm vào giỏ hàng">
-					Mua hàng
+				<button class="hidden-xs btn-buy btn-cart btn-left btn btn-views left-to add_to_cart active {%if contact and variantCount == 1%} hidden{%endif%}" title="Mua ngay">
+					Mua ngay
 				</button>
 				{% endif %}
 				{% if settings.quickview_enable %}
@@ -99,15 +102,6 @@
 				{% endif %}
 			</div>
 		</div>
-		{% if product.tags contains "giaonhanh24h" %} 
-			<img src="{{ 'sticky-giao-nhanh.png' | asset_url }}" alt="giao nhanh 24h"/>
-		{% endif %}
-		{% assign name = product.collections | join: ""%}
-		{% if name contains "freeship" %} 
-			{%capture imgsrc-%}freeship_1.jpg{%endcapture%}
-			{{settings.freeship_1}}
-			<img src="{{imgsrc | asset_url}}" alt="freeship" style="position: absolute;z-index: 1;top: 0;left: 0;"/>
-		{% endif %}
 	</div>
 	<div class="product-info">
 		<h3 class="product-name"><a href="{{ product.url }}" title="{{ product.name }}">{{ product.name }}</a></h3>

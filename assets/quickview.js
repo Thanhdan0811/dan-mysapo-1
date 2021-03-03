@@ -76,7 +76,7 @@ function initQuickView(){
 					quickview.find("del").html('');
 					quickview.find("#quick-view-product form").hide();
 
-					quickview.find(".prices").html('<span class="price h2">Liên hệ</span>');
+					quickview.find(".prices").html('<span class="price product-price">Liên hệ</span>');
 
 					quickview.find(".add_to_cart_detail span").html('Liên hệ');
 
@@ -257,7 +257,7 @@ function initQuickView(){
 				for (i in n.images) {
 					var u = Bizweb.resizeImage(n.images[i], "large");
 					var a = Bizweb.resizeImage(n.images[i], "large");
-					var f = '<li><a href="javascript:void(0)" data-imageid="' + n.id + '"" data-zoom-image="' + u + '" title="title"><img src="' + u + '" alt="Office World" style="max-width:120px; max-height:120px;" /></a></li>';
+					var f = '<li class="swiper-slide"><a href="javascript:void(0)" data-imageid="' + n.id + '"" data-zoom-image="' + u + '" title="title"><img src="' + u + '" alt="Lato Shop" /></a></li>';
 					o.append(f)
 				}
 				o.find("a").click(function() {
@@ -272,16 +272,42 @@ function initQuickView(){
 						})
 					}
 				});
-				o.slick({
-					autoplay: true,
-					autoplaySpeed: 6000,
-					dots: false,
-					arrows: false,
-					infinite: true,
-					speed: 300,
-					slidesToShow: 4,
-					slidesToScroll: 4
-				}).css("visibility", "visible")
+				var swiper = new Swiper('.thumbs_list_quickview', {
+					slidesPerView: 3,
+					spaceBetween: 43,
+					slidesPerGroup: 2,
+					pagination: {
+						el: '.swiper-pagination',
+						clickable: true,
+					},
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					},
+					breakpoints: {
+						300: {
+							slidesPerView: 'auto',
+							spaceBetween: 15
+						},
+						640: {
+							slidesPerView: 3,
+							spaceBetween: 15
+						},
+						768: {
+							slidesPerView: 2,
+							spaceBetween: 30
+						},
+						1024: {
+							slidesPerView: 3,
+							spaceBetween: 30
+						},
+						1200: {
+							slidesPerView: 4,
+							spaceBetween: 15
+						}
+					}
+				}).css("visibility", "visible");
+				
 			} else {  
 				$('.thumbs_quickview').removeClass('thumbs_list_quickview');
 				r.find(".quickview-more-views").remove();
@@ -429,17 +455,41 @@ function initQuickView(){
 			}
 		}
 		function productImage() {
-			$('#thumblist').slick({
-				autoplay: true,
-				autoplaySpeed: 6000,
-				dots: false,
-				arrows: false,
-				infinite: true,
-				speed: 300,
-				slidesToShow: 3,
-				slidesToScroll: 3
+			var swiper = new Swiper('.thumbs_list_quickview', {
+				slidesPerView: 3,
+				spaceBetween: 43,
+				slidesPerGroup: 2,
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				},
+				breakpoints: {
+					300: {
+						slidesPerView: 'auto',
+						spaceBetween: 15
+					},
+					640: {
+						slidesPerView: 3,
+						spaceBetween: 15
+					},
+					768: {
+						slidesPerView: 2,
+						spaceBetween: 30
+					},
+					1024: {
+						slidesPerView: 3,
+						spaceBetween: 30
+					},
+					1200: {
+						slidesPerView: 3,
+						spaceBetween: 43
+					}
+				}
 			});
-
 			if (!!$.prototype.fancybox){
 				$('li:visible .fancybox, .fancybox.shown').fancybox({
 					'hideOnContentClick': true,

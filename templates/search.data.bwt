@@ -1,17 +1,17 @@
 {% layout none %}
 <div class="category-products">
 	{% if search.results.size > 0 %}
-	<div class="border-bottom">
+	<div class="section">
 		{%include 'collection-sortby'%}
 	</div>
 	{%endif%}
 	{% paginate search.results by settings.collection_number_product %}	
 	{% if search.results.size > 0 %}
 	<section class="products-view products-view-grid collection_reponsive list_hover_pro">
-		<div class="row content-col">
+		<div class="row">
 			{% for product in search.results %}
-			<div class="col-lg-4 col-md-4 col-sm-4 col-6 product-col">
-				<div class="item_product_main item_product_main_relative">
+			<div class="col-lg-4 col-md-4 col-sm-6 col-6">
+				<div class="item_product_main margin-bottom-30 item_product_main_relative">
 					{%include 'product_grid_office'%}	
 				</div>
 			</div>	

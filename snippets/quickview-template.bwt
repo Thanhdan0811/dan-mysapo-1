@@ -16,8 +16,8 @@
 						<div class="loading-imgquickview" style="display:none;"></div>
 					</div>
 					<div class="more-view-wrapper clearfix">
-						<div class="thumbs_quickview owl_nav_custome1" id="thumbs_list_quickview">
-							<ul class="product-photo-thumbs quickview-more-views-owlslider not-thuongdq" id="thumblist_quickview"></ul>
+						<div class="thumbs_quickview owl_nav_custome1 swiper-container" id="thumbs_list_quickview">
+							<ul class="product-photo-thumbs quickview-more-views-owlslider not-thuongdq swiper-wrapper" id="thumblist_quickview"></ul>
 						</div>
 					</div>
 				</div>
@@ -28,7 +28,7 @@
 						<div class="vend-qv group-status">
 							<div class="left_vend">
 								<div class="first_status ">Thương hiệu:
-								<span class="vendor_ status_name"></span>
+									<span class="vendor_ status_name"></span>
 								</div>		
 								<span class="line_tt">|</span>
 								<div class="top_sku first_status">Mã sản phẩm:
@@ -55,34 +55,44 @@
 						</div>
 					</div>
 					{%endif%}
-
-
 					<form action="/cart/add" method="post" enctype="multipart/form-data" class="quick_option variants form-ajaxtocart form-product">
 						<span class="price-product-detail hidden" style="opacity: 0;">
 							<span class=""></span>
 						</span>
 						<select name='variantId' class="hidden" style="display:none"></select>
 						<div class="form-group form_product_content">
+
+							{%comment%}
+							<div class="soluong soluong_type_1 {% if product.available %}show{%else%}hidden{%endif%}">
+								<label>Số lượng:</label>
+								<div class="custom input_number_product custom-btn-number form-control">									
+									<button class="btn_num num_1 button button_qty" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro ) &amp;&amp; qtypro &gt; 1 ) result.value--;return false;" type="button">-</button>
+									<input type="text" id="qtym" name="quantity" value="1" maxlength="3" class="form-control prd_quantity " onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;" onchange="if(this.value == 0)this.value=1;">
+									<button class="btn_num num_2 button button_qty" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;return false;" type="button">+</button>
+								</div>
+							</div>
+							{%endcomment%}
 							<div class="count_btn_style quantity_wanted_p">
-								<div class="custom input_number_product soluong1">									
-									<a class="btn_num num_1 button button_qty" onClick="var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if( !isNaN( qtyqv ) &amp;&amp; qtyqv &gt; 1 ) result.value--;return false;">-</a>
-									<input type="text" id="quantity-detail" name="quantity" value="1" maxlength="2" class="form-control prd_quantity" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;" onchange="if(this.value == 0)this.value=1;">
-									<a class="btn_num num_2 button button_qty" onClick="var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if( !isNaN( qtyqv )) result.value++;return false;">+</a>
+								<div class=" soluong1">
+									<label>Số lượng:</label>
+									<div class="sssssscustom input_number_product  soluong1">
+										<a class="btn_num num_1 button button_qty" onClick="var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if( !isNaN( qtyqv ) &amp;&amp; qtyqv &gt; 1 ) result.value--;return false;">-</a>
+										<input type="text" id="quantity-detail" name="quantity" value="1" maxlength="2" class="form-control prd_quantity" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;" onchange="if(this.value == 0)this.value=1;">
+										<a class="btn_num num_2 button button_qty" onClick="var result = document.getElementById('quantity-detail'); var qtyqv = result.value; if( !isNaN( qtyqv )) result.value++;return false;">+</a>
+									</div>
 								</div>
 								<div class="button_actions clearfix">
 									<button type="submit" class="btn_cool btn btn_base fix_add_to_cart ajax_addtocart btn_add_cart btn-cart add_to_cart add_to_cart_detail">
-										<span class="btn-content text_1">Thêm vào giỏ hàng</span>
+										<span class="btn-content text_1">Mua sản phẩm</span>
 									</button>
 								</div>
 							</div>
 						</div>
-
 					</form>
-
 				</div>
 			</div>
 		</div>      
-		<a title="Close" class="quickview-close close-window" href="javascript:;"><i class="fas fa-times"></i></a>
+		<a title="Close" class="quickview-close close-window" href="javascript:;"><i class="icon-close"></i></a>
 	</div>    
 </div>
 <script type="text/javascript">  
@@ -132,7 +142,7 @@
 			}
 
 			addToCart.removeClass('disabled').removeAttr('disabled');
-			addToCart.html('<span class="btn-image"></span><span class="btn-content text_1">Thêm vào giỏ hàng</span>').removeAttr('disabled');
+			addToCart.html('<span class="btn-image"></span><span class="btn-content text_1">Mua sản phẩm</span>').removeAttr('disabled');
 			status.text('Còn hàng');
 			if(variant.price < 1){			   
 				$("#quick-view-product .price").html('Liên hệ');

@@ -1,21 +1,29 @@
-{%assign blog_size = blogs[settings.url_index_blog].articles_count%}
-<section class="section_blog">
-	<div class="container">
-		<div class="title_module_main clearfix">
-			<h2 class="h2">
-				<a href="{{settings.url_index_blog}}" title="{{settings.title_index_blog}}">{{settings.title_index_blog}}</a>
-			</h2>
-		</div>
-		{%if blog_size > 0%}
-		<div class="slickblog">
-			{% for article in blogs[settings.url_index_blog].articles limit: {{settings.limit_index_blog}} %}
-			{%include 'blog_list_item'%}
-			{%endfor%}
-		</div>
-		{%else%}
-		<div class="section owl-blog">
-			<p class="block a-center">Danh mục đang cập nhật bài viết</p>
-		</div>
-		{%endif%}
+{% if blogs[settings.url_blog_sec_base].articles_count > 0 %}
+{% assign blog_alias = settings.url_blog_sec_base %}
+{% else %}
+{% assign blog_alias = '#' %}
+{% endif %}
+<div class="container section_blog">
+	<div class="title_modules">
+		<h2>
+			<a href="{{blog_alias}}" title="{{settings.title_blog_sec_base}}">{{settings.title_blog_sec_base}}</a>
+		</h2>
 	</div>
-</section>
+	{% if blogs[blog_alias].articles_count > 0 %}
+	<div class="row blogs_mobile_base">
+		{% for article in blogs[blog_alias].articles limit: settings.limit_blog_sec_base %}
+		<div class="col-lg-4 col-md-4 col-10">
+			{%include 'blog_item_index'%}
+		</div>
+		{% endfor %}
+	</div>
+	{% else %}
+	<div class="row">
+		<div class="col-lg-12 col-md-12">
+			<div class="alert alert-warning alert-dismissible show margin-bottom-0" role="alert">
+				<span>Danh mục đang cập nhật bài viết.</span>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+</div>

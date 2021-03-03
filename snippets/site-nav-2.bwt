@@ -5,14 +5,14 @@
 				<ul class="item_big">
 					{% for link in linklists[settings.main_menu].links %}
 					{% if linklists[link.alias] != null %}
-					<li class="nav-item {%if link.active%} active {%endif%}">
+					<li class="nav-item level0 {%if link.active%} active {%endif%}">
 						<a class="a-img" href="{{ link.url }}" title="{{ link.title }}">
-							<span>{{ link.title }}{% if linklists[link.alias].links %}<i class="fa fa-caret-down"></i>{% endif %}</span>
+							<span>{{ link.title }} {% if linklists[link.alias].links %}<i class="icon-down"></i>{% endif %}</span>
 						</a>
 						<ul class="item_small">
 							{% for link_child in linklists[link.alias].links %}
 							<li>
-								<a href="{{ link_child.url }}" title="{{ link_child.title }}">{{ link_child.title }} {% if linklists[link_child.alias].links %}<i class="fa fa-angle-right"></i>{% endif %}</a>
+								<a href="{{ link_child.url }}" title="{{ link_child.title }}">{{ link_child.title }} {% if linklists[link_child.alias].links %}<i class="icon-right"></i>{% endif %}</a>
 								{% if linklists[link_child.alias].links %}
 								<ul>
 									{% for link_child2 in linklists[link_child.alias].links %}
@@ -29,7 +29,7 @@
 					{% else %}
 					<li class="nav-item {%if link.active %} active {% endif %}">	
 						<a class="a-img" href="{{ link.url }}" title="{{ link.title }}">
-							<span>{{ link.title }}</span>
+							<span>{{ link.title }}</span>{% if linklists[link.alias].links %}<i class="icon-down"></i>{% endif %}
 						</a>
 					</li>
 					{% endif %}

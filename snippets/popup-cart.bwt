@@ -1,7 +1,7 @@
 <div id="popup-cart" class="popcart">
 	<div id="popup-cart-desktop" class="clearfix">
 		<div class="title-popup-cart">
-			<img src="{{'ico_check_.png' | asset_url}}"  alt="{{store.name}}"/> <span class="your_product"> Bạn đã thêm [<span class="cart-popup-name" style="color: red;"></span>] vào giỏ hàng</span>
+			<img src="{{'ico_check_.png' | asset_url}}"  alt="{{store.name}}"/> <span class="your_product"> Bạn đã thêm [ <span class="cart-popup-name" style="color: red;"></span>] vào giỏ hàng</span>
 		</div>          
 		<div class="wrap_popup">
 			<div class="title-quantity-popup" >
@@ -30,8 +30,14 @@
 					</div>
 				</div>
 			</div>
-			<a title="Close" class="close-modal quickview-close close-pop" href="javascript:;" onclick="$('#popup-cart').modal('hide');"><i class="fa fa-close"></i></a>
+			<a title="Close" class="close-modal quickview-close close-pop" href="javascript:;" onclick="$('#popup-cart').modal('hide');"><i class="icon-close"></i></a>
 		</div>
 	</div>
 
 </div>
+<script>
+$('.close-pop').click(function() {
+	$('#popup-cart').removeClass('opencart');
+	$('body').removeClass('opacitycart');
+});
+</script>

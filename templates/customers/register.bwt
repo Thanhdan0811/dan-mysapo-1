@@ -51,7 +51,7 @@
 								</div>
 								<div class="section margin-top-10 button_bottom">
 									<button type="submit" value="Đăng ký" class="btn  btn-style btn_50 btn_register">Đăng ký</button>
-									<span class="or">Bạn đã có tài khoản?Đăng nhập
+									<span class="or">Bạn đã có tài khoản? Đăng nhập
 										<a href="/account/login" style="text-decoration: underline;" class="btn-link-style  btn-style margin-right-0">tại đây</a></span>
 								</div>
 							</div>

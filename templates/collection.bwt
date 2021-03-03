@@ -1,19 +1,18 @@
-{% include 'breadcrumb' %} 
-{% if collection.alias == "san-pham-moi"%} 
-	Đây là trang sản phẩm mới
-{% endif %}
 <div class="section wrap_background">
+	{% include 'breadcrumb' %}  
 	<div class="container ">
 		<div class="bg_collection section">
 			<div class="row">
-				<div class="main_container collection col-xl-9 col-lg-9 col-md-12 col-sm-12">
-
-					<h1 class="title_page collection-title">
-						{%if page_title == 'All'%}Tất cả sản phẩm{%else%}{{ page_title }}{%endif%}
-					</h1>
+				<aside class="dqdt-sidebar sidebar left-content col-lg-3 col-md-4 col-sm-4">
+					<div class="wrap_background_aside asidecollection">
+						{%include 'aside-collection'%}
+					</div>
+				</aside>
+				<div class="main_container collection col-lg-9 col-md-12 col-sm-12">
+					<h1 class="collectiontitle">{%if collection.name == 'All'%}Tất cả sản phẩm{%else%}{{ collection.name }}{%endif%}</h1>
 					<div class="category-products products">
 						{% if collection.products.size > 0 %}
-						<div class="border-bottom">
+						<div class="section">
 							{%include 'collection-sortby'%}
 						</div>
 						{%endif%}
@@ -31,27 +30,25 @@
 						{% endif %}
 						{% endpaginate %}
 					</div>
-					<div id="open-filters" class="open-filters hidden-lg">
-						<i class="fa fa-filter"></i>
+
+					<div id="open-filters" class="open-filters d-lg-none d-xl-none">
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" x="0" y="0" viewBox="0 0 384 384" style="enable-background:new 0 0 14 14" xml:space="preserve" class="i-bar-white"><g><path xmlns="http://www.w3.org/2000/svg" d="m368 154.667969h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#797979" data-original="#000000" style="" class=""></path><path xmlns="http://www.w3.org/2000/svg" d="m368 32h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#797979" data-original="#000000" style="" class=""></path><path xmlns="http://www.w3.org/2000/svg" d="m368 277.332031h-352c-8.832031 0-16-7.167969-16-16s7.167969-16 16-16h352c8.832031 0 16 7.167969 16 16s-7.167969 16-16 16zm0 0" fill="#797979" data-original="#000000" style="" class=""></path></g></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" x="0" y="0" viewBox="0 0 492 492" style="enable-background:new 0 0 14 14" xml:space="preserve" class="i-close-white"><g xmlns="http://www.w3.org/2000/svg"><path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872    c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872    c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052    L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116    c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952    c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116    c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z" fill="#ffffff" data-original="#000000" style="" class=""></path></g></svg>
 						<span>Lọc</span>
 					</div>
 				</div>
-				<aside class="dqdt-sidebar sidebar left-content col-xl-3 col-lg-3 col-md-12 col-sm-12">
-					<div class="wrap_background_aside asidecollection">
-						{%include 'aside-collection'%}
-					</div>
-				</aside>
 			</div>
 		</div>
 	</div>
-</div>
-<script>
-	var colName = "{%if page_title == 'All'%}Tất cả sản phẩm{%else%}{{ page_title }}{%endif%}";
-	{% if collection.id > 0 %}
-	var colId = {{collection.id}};
-	{%else%}
-	var colId = 0;
-	{%endif%}
 
-	var selectedViewData = "{% if template contains '.list' %}data_list{% else %}data{% endif %}";
-</script>
+	<script>
+		var colName = "{%if page_title == 'All'%}Tất cả sản phẩm{%else%}{{ page_title }}{%endif%}";
+		{% if collection.id > 0 %}
+		var colId = {{collection.id}};
+		{%else%}
+		var colId = 0;
+		{%endif%}
+
+		var selectedViewData = "{% if template contains '.list' %}data_list{% else %}data{% endif %}";
+	</script>
+</div>

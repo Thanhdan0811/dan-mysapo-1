@@ -1,10 +1,10 @@
 <nav class="clearfix relative nav_pagi w_100">
 	<ul class="pagination clearfix">
 		{% if paginate.previous %}
-		<li class="page-item hidden-xs"><a class="page-link" onclick="doSearch({{ paginate.current_page | minus: 1 }})" href="javascript:;"><i class="fa fa-angle-left" aria-hidden="true"></i>
+		<li class="page-item hidden-xs"><a class="page-link" onclick="doSearch({{ paginate.current_page | minus: 1 }})" href="javascript:;"><i class="icon icon-left" aria-hidden="true"></i>
 			</a></li>
 		{% else %}  
-		<li class="page-item disabled"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
+		<li class="page-item disabled"><a class="page-link" href="#"><i class="icon icon-left"></i></a></li>
 		{% endif %}
 
 		{% for part in paginate.parts %}
@@ -20,10 +20,10 @@
 		{% endfor %}
 
 		{% if paginate.next %}
-		<li class="page-item hidden-xs"><a class="page-link" onclick="doSearch({{ paginate.current_page | plus: 1 }})" href="javascript:;"><i class="fa fa-angle-right" aria-hidden="true"></i>
+		<li class="page-item hidden-xs"><a class="page-link" onclick="doSearch({{ paginate.current_page | plus: 1 }})" href="javascript:;"><i class="icon icon-right" aria-hidden="true"></i>
 			</a></li>
 		{% else %}
-		<li class="page-item disabled"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+		<li class="page-item disabled"><a class="page-link" href="#"><i class="icon icon-right"></i></a></li>
 		{% endif %}
 	</ul>
 </nav>

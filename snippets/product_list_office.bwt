@@ -76,18 +76,15 @@
 		<a class="image_thumb" href="{{ product.url }}" title="{{ product.name }}">
 			<img class="lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"  data-src="{{ product.featured_image.src | img_url:'large' }}" alt="{{ product.name }}">
 		</a>
+		{%if settings.quickview_enable%}
+		<a title="Xem nhanh" href="{{ product.url }}" data-handle="{{ product.alias }}" class="xem_nhanh btn-views btn_view btn right-to quick-view hidden-xs hidden-sm hidden-md">
+			<i class="fa fa-search"></i>Xem nhanh
+		</a>
+		{%endif%}
+
 	</div>
 	<div class="product-info">
 		<h3 class="product-name"><a href="{{ product.url }}" title="{{ product.name }}">{{ product.name }}</a></h3>
-		<div class="section desproduct">
-			{%if product.summary != null and product.summary != '' and product.summary !=""%}
-			{{product.summary | strip_html | truncate: 150}}
-			{%elsif product.content != null and product.content != '' and product.content !=""%}
-			{{product.content | strip_html | truncate: 150}}
-			{%else%}
-			Đang cập nhật...
-			{%endif%}
-		</div>
 		<div class="price-box">
 			{%if contact %}
 			Liên hệ
@@ -102,21 +99,30 @@
 			{% endif %}
 			{% endif %}
 		</div>
+		<div class="section desproduct">
+			{%if product.summary != null and product.summary != '' and product.summary !=""%}
+			{{product.summary | strip_html | truncate: 150}}
+			<a href="{{product.url}}" title="Xem thêm">Xem thêm</a>
+			{%elsif product.content != null and product.content != '' and product.content !=""%}
+			{{product.content | strip_html | truncate: 150}}
+			<a href="{{product.url}}" title="Xem thêm">Xem thêm</a>
+			{%else%}
+			Đang cập nhật...
+			{%endif%}
+		</div>
 		{%if variantCount > 1 %}
 		<input class="hidden" type="hidden" name="variantId" value="{{ product.variants[0].id }}" />
-		<button class="hidden-xs btn btn-cart btn-left  btn btn-views left-to" title="Tùy chọn" type="button" onclick="window.location.href='{{product.url}}'" >
-			Tùy chọn
+		<button class="btn btn-cart btn btn-views left-to" title="Chọn sản phẩm" type="button" onclick="window.location.href='{{product.url}}'" >
+			<i class="fa fa-arrow-right"></i> Chọn sản phẩm
 		</button>
 		{% elsif contact %}
 		{% elsif sold_out %}
 		{% else %}
 		<input type="hidden" name="variantId" value="{{ product.variants[0].id }}" />
-		<button class="btn-buy btn-cart btn-left btn btn-views left-to add_to_cart active {%if contact and variantCount == 1%} hidden{%endif%}" title="Thêm vào giỏ">
-			Thêm vào giỏ
+		<button class="btn-buy btn-cart btn btn-views left-to add_to_cart active {%if contact and variantCount == 1%} hidden{%endif%}" title="Cho vào giỏ hàng">
+			<i class="fa fa-arrow-right"></i> Cho vào giỏ hàng
 		</button>
 		{% endif %}
-		<button class="hidden-xs btn btn-cart btn btn-right btn-views left-to" title="Chi tiết" type="button" onclick="window.location.href='{{product.url}}'" >
-			<i class="fa fa-search"></i>
-		</button>
+
 	</div>
 </form>

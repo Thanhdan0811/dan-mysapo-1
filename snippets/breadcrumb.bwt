@@ -1,9 +1,9 @@
 <section class="bread-crumb">
 	<span class="crumb-border"></span>
 	<div class="container">
-		<div class="row">
-			<div class="col-12 a-left">
-				<ul class="breadcrumb">					
+		<div class="rows">
+			<div class="col-xs-12 a-left">
+				<ul class="breadcrumb" >					
 					<li class="home">
 						<a  href="/" ><span >Trang chủ</span></a>						
 						<span class="mr_lr">&nbsp;/&nbsp;</span>
@@ -15,7 +15,7 @@
 						<span class="mr_lr">&nbsp;/&nbsp;</span>
 					</li>
 					{% endif %}
-					<li><strong><span>{{ product.name }}</span></strong></li>
+					<li><strong><span>{{ product.name }}</span></strong><li>
 					{% elsif template contains 'collection' and collection.alias %}
 					{% if current_tags %}					
 					{% capture url %}/collections/{{ collection.alias }}{% endcapture %}
@@ -39,7 +39,7 @@
 					{% elsif template contains 'order' %}
 					<li>
 						<a  href="/account" ><span >Tài khoản</span></a>
-						<span class="mr_lr">&nbsp;/&nbsp;</span>
+						<span class="mr_lr"> &nbsp;/&nbsp; </span>
 					</li>
 
 					<li><strong ><span>Đơn hàng {{ order.name}}</span></strong></li>

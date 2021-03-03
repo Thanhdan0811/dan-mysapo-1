@@ -1010,3 +1010,22 @@
 
 
 </script>
+
+<script>
+	window.onload = function(e) {
+		if(document.referrer.includes("collections/all") ) {
+			console.log("{{product.alias}}")
+			let product = "{{product.alias}}";
+			let listViewed = JSON.parse(localStorage.getItem('listViewed'));
+			listViewed
+			if(!listViewed) {
+				let listView = [];
+				listView.push(product);
+				localStorage.setItem('listViewed', listView);
+				return;
+			} 
+			listViewed.push(product);
+			console.log(listViewed);
+		}
+	}
+</script>

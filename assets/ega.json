@@ -5,8 +5,8 @@
     "blogs": {},
     "articles": {},
     "egaTheme": {
-        "sapo-theme-zendo": {
-            "name": "sapo-theme-zendo",
+        "sapo-theme-base-free": {
+            "name": "sapo-theme-base-free",
             "version": "v1.0.0"
         }
     }

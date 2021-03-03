@@ -1,0 +1,106 @@
+<div class="wrapmenu">
+	<div class="wrapmenu_full menumain_full">
+		<div class="containers">
+			<!-- Menu mobile -->
+			<div class="contenttop clearfix">
+				<div class="header_right_2 clearfix">
+					<div class="cartgroup">
+						<div class="header_search">
+							<div class="icon-search-mobile">
+								<i class="icon-search"></i>
+							</div>
+							<form action="/search" method="get" class="input-group search-bar" role="search">
+								<input type="text" name="query" value="" autocomplete="off" placeholder="Tìm kiếm sản phẩm..." class="input-group-field auto-search" required="">
+								<span class="input-group-btn">
+									<button type="submit" class="btn icon-fallback-text">
+										<span class="icon-search" ></span>      
+									</button>
+								</span>
+							</form>
+						</div>
+					</div>
+					<div class="top-cart-contain">
+						<div class="mini-cart text-xs-center">
+							<a class="img_hover_cart" href="/cart" title="Giỏ hàng">
+								<img src="{{'i-hcart.png' | asset_url}}" alt="{{ store.name }}">
+								<span class="count_item count_item_pr"></span>
+								Giỏ hàng
+							</a>
+						</div>
+					</div>
+					<div class="account">
+						<img src="{{'i-user.png' | asset_url}}" alt="{{ store.name }}">
+						<ul class="account_header">
+							{% if customer %}
+							<li>
+								<a href="/account/logout">Đăng xuất</a>
+							</li>
+							<li>
+								<a rel="nofollow" href="/account" title="{{customer.name}}">{{customer.name}}</a>
+							</li>
+							{%else%}
+							<li>
+								<a href="/account/login">Đăng nhập</a>
+							</li>
+							<li>
+								<a href="/account/register">Đăng ký</a>
+							</li>
+							{%endif%}
+						</ul>
+					</div>	
+				</div>
+			</div>
+			<div class="menu_mobile_2">
+				<ul class="ul_collections">
+					{% for link in linklists[settings.main_menu].links %}
+					<li class="level0 level-top parent">
+						<a href="{{ link.url }}">{{ link.title }}</a>
+						{% if linklists[link.alias] != null %}
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 512 512" xml:space="preserve" class="icon icon-plus">
+							<g xmlns="http://www.w3.org/2000/svg">
+								<path d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424   C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428   s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z" fill="#b1b1b1" data-original="#000000" style="" class=""></path>
+							</g>
+						</svg>
+						<ul class="level0" style="display:none;">
+							{% for childlink in linklists[link.alias].links %}
+							<li class="level1 {% if childlink.active %} active {%endif%}"> 
+								<a href="{{ childlink.url }}"> <span>{{ childlink.title }}</span> </a>
+								{% if linklists[childlink.alias] != null %}
+								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 512 512" xml:space="preserve" class="icon icon-plus">
+									<g xmlns="http://www.w3.org/2000/svg">
+										<path d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424   C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428   s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z" fill="#b1b1b1" data-original="#000000" style="" class=""></path>
+									</g>
+								</svg>
+								<ul class="level1" style="display:none;">
+									{% for childlink2 in linklists[childlink.alias].links %}
+									<li class="level2 {% if childlink2.active %} active {%endif%}">
+										<a href="{{ childlink2.url }}"><span>{{ childlink2.title }}</span></a>
+										{% if linklists[childlink2.alias] != null %}
+										<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 512 512" xml:space="preserve" class="icon icon-plus">
+											<g xmlns="http://www.w3.org/2000/svg">
+												<path d="M286.935,69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952,0-9.233,1.807-12.85,5.424   C1.807,72.998,0,77.279,0,82.228c0,4.948,1.807,9.229,5.424,12.847l127.907,127.907c3.621,3.617,7.902,5.428,12.85,5.428   s9.233-1.811,12.847-5.428L286.935,95.074c3.613-3.617,5.427-7.898,5.427-12.847C292.362,77.279,290.548,72.998,286.935,69.377z" fill="#b1b1b1" data-original="#000000" style="" class=""></path>
+											</g>
+										</svg>
+										<ul class="level2" style="display:none;">
+											{% for childlink3 in linklists[childlink2.alias].links %}
+											<li class="level3 {% if childlink3.active %} active {%endif%}">
+												<a href="{{ childlink3.url }}"><span>{{ childlink3.title }}</span></a>
+											</li>
+											{% endfor %}
+										</ul>
+										{% endif %}
+									</li>
+									{% endfor %}
+								</ul>
+								{%endif%}
+							</li>
+							{% endfor %}
+						</ul>
+						{%endif%}
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

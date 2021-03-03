@@ -28,7 +28,7 @@
 
 				<h1 class="title-head">Địa chỉ của bạn</h1>
 				<p class="btn-row">
-					<button class="btn-edit-addr btn btn-primary btn-more" type="button" onclick="Bizweb.CustomerAddress.toggleNewForm(); return false;" >Thêm địa chỉ</button> 							
+					<button class="btn-edit-addr btn btn-primarys btn-more" type="button" onclick="Bizweb.CustomerAddress.toggleNewForm(); return false;" >Thêm địa chỉ</button> 							
 				</p>
 				<div id="add_address" class="form-list modal_address modal">
 					<div class="btn-close closed_pop"><i class="fa fa-times"></i></div>
@@ -98,7 +98,7 @@
 						</div>	
 						<div class="btn-row">
 							<button class="btn btn-lg btn-dark-address btn-outline article-readmore btn-close" type="button"  onclick="Bizweb.CustomerAddress.toggleNewForm(); return false;"><span>Hủy</span></button>
-							<button class="btn btn-lg btn-primary btn-submit" id="addnew" type="submit"><span>Thêm địa chỉ</span></button>	
+							<button class="btn btn-lg btn-primarys btn-submit" id="addnew" type="submit"><span>Thêm địa chỉ</span></button>	
 						</div>
 					</div>
 					{% endform %}
@@ -144,7 +144,7 @@
 							</div>
 							<div id="tool_address_{{address.id}}" class="btn-address">
 								<p class="btn-row">
-									<button class="btn-edit-addr btn btn-primary btn-edit" type="button" data-form="edit_address_{{address.id}}" aria-controls="edit_address_{{address.id}}">
+									<button class="btn-edit-addr btn btn-primarys btn-edit" type="button" data-form="edit_address_{{address.id}}" aria-controls="edit_address_{{address.id}}">
 										Chỉnh sửa địa chỉ
 									</button>
 									<button class="{% if address.id == customer.default_address.id %}hidden {% endif %}btn btn-dark-address btn-edit-addr btn-delete" type="button" onclick="Bizweb.CustomerAddress.destroy({{address.id}});return false"><span>Xóa</span></button>
@@ -227,7 +227,7 @@
 								<button class="btn btn-dark-address btn-fix-addr btn-close" type="button" data-form="edit_address_{{address.id}}">
 									Hủy
 								</button>										
-								<button class="btn btn-primary btn-submit" id="update"><span>Cập nhật địa chỉ</span></button>																	
+								<button class="btn btn-primarys btn-submit" id="update"><span>Cập nhật địa chỉ</span></button>																	
 
 							</div>
 						</div>

@@ -1,0 +1,67 @@
+<section class="section_product_news clearfix">
+	<div class="container">
+		<div class="title_modules">
+			<h2> 
+				<a href="{{settings.url_product_news}}" title="{{settings.title_product_news}}">{{settings.title_product_news}}</a>
+			</h2>
+		</div>
+		<div class="swiper_news swiper-container">
+			<div class="swiper-wrapper">
+				{%assign count = collections[settings.url_product_news].products_count %}
+				{%if count > 0 %}
+				{% for product in collections[settings.url_product_news].products limit: settings.limit_product_news  %}
+				<div class="item_product_main swiper-slide">
+					{%include 'product_grid_office' %}
+				</div>
+				{%endfor %}
+
+				{%else-%}
+				<div class="alert alert-warning alert-dismissible show margin-bottom-0" role="alert">
+					<span>Danh mục đang cập nhật sản phẩm.</span>
+				</div> 
+				{%endif %}
+			</div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+</section>
+
+<script>
+	var swiper = new Swiper('.swiper_news', {
+		slidesPerView: 4,
+		spaceBetween: 30,
+		slidesPerGroup: 2,
+		pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+		},
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+		breakpoints: {
+			300: {
+				slidesPerView: 2,
+				spaceBetween: 15
+			},
+			500: {
+				slidesPerView: 2,
+				spaceBetween: 10
+			},
+			640: {
+				slidesPerView: 2,
+				spaceBetween: 10
+			},
+			768: {
+				slidesPerView: 3,
+				spaceBetween: 15
+			},
+			1024: {
+				slidesPerView: 4,
+				spaceBetween: 30
+			}
+		}
+	});
+</script>

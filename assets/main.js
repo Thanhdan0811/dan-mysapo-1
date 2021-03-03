@@ -11,12 +11,8 @@ $(document).ready(function ($) {
 });
 
 
-$('.close-pop').click(function() {
-	$('#popup-cart').removeClass('opencart');
-	$('body').removeClass('opacitycart');
-});
 $(document).on('click','.overlay, .close-popup, .btn-continue, .fancybox-close', function() {   
-	hidePopup('.awe-popup'); 
+	hidePopup('.awe-popup'); 	
 	setTimeout(function(){
 		$('.loading').removeClass('loaded-content');
 	},500);
@@ -39,6 +35,18 @@ function awe_hidePopup(selector) {
 awe.hidePopup = function (selector) {
 	$(selector).removeClass('active');
 }
+$(document).on('click','.overlay, .close-window, .btn-continue, .fancybox-close', function() {   
+	awe.hidePopup('.awe-popup'); 
+	setTimeout(function(){
+		$('.loading').removeClass('loaded-content');
+	},500);
+	return false;
+})
+var wDWs = $(window).width();
+if (wDWs < 1199) {
+	/*Remove html mobile*/
+	$('.quickview-product').remove();
+}
 function awe_convertVietnamese(str) { 
 	str= str.toLowerCase();
 	str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
@@ -54,41 +62,26 @@ function awe_convertVietnamese(str) {
 	return str; 
 } window.awe_convertVietnamese=awe_convertVietnamese;
 function awe_category(){
-	$('.nav-category .fa-caret-down').click(function(e){
-		$(this).toggleClass('fa-caret-up');
+	$('.nav-category .fa-plus').click(function(e){
+		$(this).toggleClass('fa-minus fa-plus');
+		$(this).parent().toggleClass('active');
+	});
+	$('.nav-category .fa-minus').click(function(e){
+		$(this).toggleClass('fa-plus');
 		$(this).parent().toggleClass('active');
 	});
 } window.awe_category=awe_category;
 
 
 function awe_backtotop() { 
-	if ($('.back-to-top').length) {
-		var scrollTrigger = 100, // px
-			backToTop = function () {
-				var scrollTop = $(window).scrollTop();
-				if (scrollTop > scrollTrigger) {
-					$('.back-to-top').addClass('show');
-				} else {
-					$('.back-to-top').removeClass('show');
-				}
-
-				if (scrollTop > ($(document).height() - 700) ) {
-					$('.back-to-top').addClass('end');
-				} else {
-					$('.back-to-top').removeClass('end');
-				}
-			};
-		backToTop();
-		$(window).on('scroll', function () {
-			backToTop();
-		});
-		$('.back-to-top').on('click', function (e) {
-			e.preventDefault();
-			$('html,body').animate({
-				scrollTop: 0
-			}, 700);
-		});
-	}
+	$(window).scroll(function() {
+		$(this).scrollTop() > 200 ? $('.backtop').addClass('show') : $('.backtop').removeClass('show')
+	});
+	$('.backtop').click(function() {
+		return $("body,html").animate({
+			scrollTop: 0
+		}, 800), !1
+	});
 } window.awe_backtotop=awe_backtotop;
 function awe_tab() {
 	$(".e-tabs:not(.not-dqtab)").each( function(){
@@ -138,6 +131,50 @@ $('.open-filters').click(function(e){
 	$(this).toggleClass('openf');
 	$('.dqdt-sidebar').toggleClass('openf');
 });
+$(".menubar_pc").click(function(){ 
+	$('.wrapmenu_full').slideToggle('fast');
+	$('.wrapmenu_full, .cloed').toggleClass('open_menu');
+	$('.dqdt-sidebar, .open-filters').removeClass('openf')
+});
+$(".cloed").click(function(){ 
+	$(this).toggleClass('open_menu');
+	$('.wrapmenu_full').slideToggle('fast');
+});
+$(".opacity_menu").click(function(){ 
+	$('.opacity_menu').removeClass('open_opacity');
+});
+if ($('.dqdt-sidebar').hasClass('openf')) {
+	$('.wrapmenu_full').removeClass('open_menu');
+} 
+$('.ul_collections li > .icon').click(function(){
+	$(this).parent().toggleClass('current');
+	$(this).toggleClass('icon-plus icon-minus');
+	$(this).next('ul').slideToggle("fast");
+	$(this).next('div').slideToggle("fast");
+});
+$('.searchion').mouseover(function() {
+	$('.searchmini input').focus();                    
+})
+$('.quenmk').on('click', function() {
+	$('.h_recover').slideToggle();
+});
+$('a[data-toggle="collapse"]').click(function(e){
+	if ($(window).width() >= 767) { 
+		// Should prevent the collapsible and default anchor linking 
+		// behavior for screen sizes equal or larger than 768px.
+		e.preventDefault();
+		e.stopPropagation();
+	}    
+});
+var wDWs = $(window).width();
+if (wDWs < 1199) {
+	$('.ul_menu li:has(ul), .item_big li:has(ul)' ).one("click", function(e)     {
+		e.preventDefault();
+		return false;    
+	});
+
+}
+
 /********************************************************
 # MENU MOBILE
 ********************************************************/
@@ -184,19 +221,19 @@ function awe_menumobile(){
 		return this;
 	};
 })(jQuery, window, document);
-var wDWs = $(window).width();
-if (wDWs < 1199) {
-	$('.ul_menu li:has(ul)' ).doubleTapToGo();
-	$('.item_big li:has(ul)' ).doubleTapToGo();
-}
-$(document).ready(function() {
-	$('.btn-wrap').click(function(e){
-		$(this).parent().slideToggle('fast');
+
+$(document).ready(function(){
+	$('.menubutton').click(function(e){
+		e.stopPropagation();
+		$('.wrapmenu_right_2').toggleClass('open_sidebar_menu');
+		$('.opacity_menu').toggleClass('open_opacity');
+	});
+	$('.opacity_menu').click(function(e){
+		$('.wrapmenu_right_2').removeClass('open_sidebar_menu');
+		$('.opacity_menu').removeClass('open_opacity');
 	});
 
 
-});
-$(document).ready(function(){
 	var wDW = $(window).width();
 	/*Footer*/
 	if(wDW > 767){
@@ -209,38 +246,31 @@ $(document).ready(function(){
 		});
 	}
 });
-/*MENU MOBILE*/
-var ww = $(window).width();
-if (ww < 992){
-	$('.menu-bar').on('click', function(){
-		$('.menu_mobile').slideToggle('400');
-	});
-}
-$('.opacity_menu').click(function(e){
-	$('.menu_mobile').removeClass('open_sidebar_menu');
-	$('.opacity_menu').removeClass('open_opacity');
-});
 
-if ($('.dqdt-sidebar').hasClass('openf')) {
-	$('.wrapmenu_full').removeClass('open_menu');
-} 
-$('.ul_collections li > .fa').click(function(){
-	$(this).parent().toggleClass('current');
-	$(this).toggleClass('fa-angle-down fa-angle-up');
-	$(this).next('ul').slideToggle("fast");
-	$(this).next('div').slideToggle("fast");
-});
-$('.searchion').mouseover(function() {
-	$('.searchmini input').focus();                    
-})
-$('.quenmk').on('click', function() {
-	$('.h_recover').slideToggle();
-});
-$('a[data-toggle="collapse"]').click(function(e){
-	if ($(window).width() >= 767) { 
-		// Should prevent the collapsible and default anchor linking 
-		// behavior for screen sizes equal or larger than 768px.
-		e.preventDefault();
-		e.stopPropagation();
-	}    
+
+$(document).ready(function() {
+	$('.btn-wrap').click(function(e){
+		$(this).parent().slideToggle('fast');
+	});
+
+	/*fix menu sub*/
+	jQuery("#nav li.level0 li").mouseover(function(){
+		if(jQuery(window).width() >= 740){
+			jQuery(this).children('ul').css({top:0,left:"158px"});
+			var offset = jQuery(this).offset();
+			if(offset && (jQuery(window).width() < offset.left+300)){
+				jQuery(this).children('ul').removeClass("right-sub");
+				jQuery(this).children('ul').addClass("left-sub");
+				jQuery(this).children('ul').css({top:0,left:"-158px"});
+			} else {
+				jQuery(this).children('ul').removeClass("left-sub");
+				jQuery(this).children('ul').addClass("right-sub");
+			}
+			jQuery(this).children('ul').fadeIn(100);
+		}
+	}).mouseleave(function(){
+		if(jQuery(window).width() >= 740){
+			jQuery(this).children('ul').fadeOut(100);
+		}
+	});
 });

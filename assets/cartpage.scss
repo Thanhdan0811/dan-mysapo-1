@@ -2,11 +2,10 @@
 #Variable
 ==============================================================================*/
 $gutter: 30px;
-$main-color: #363636;
-$font-base:   "Roboto",sans-serif;
-$hover: #0089ff;
-$text-color: #333333;
-$price:#363636;
+$main-color: #eb2227;
+$font-base:  -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+$hover: #eb2227;
+$text-color: #323c42;
 /*============================================================================
 10. CART 
 ==============================================================================*/
@@ -194,7 +193,7 @@ $price:#363636;
 				flex-flow: column;
 				justify-content: center;
 				border-left:1px solid #ebebeb;
-				padding: 20px 10px 20px 20px;
+				padding: 20px;
 				height: 160px;
 				&:last-child{
 					padding:10px;
@@ -227,7 +226,15 @@ $price:#363636;
 				border-radius: 50%;
 				line-height: 40px;
 				i{
-					padding-right:5px;
+					background-image: url(//bizweb.dktcdn.net/100/417/981/themes/809659/assets/icon-trash.svg?1614237577763);
+					background-repeat: no-repeat;
+					width: 20px;
+					height: 16px;
+					display: block;
+					background-size: contain;
+					position: absolute;
+					top: 45%;
+					right: 14px;
 				}
 				&:hover {
 					color: $hover;
@@ -301,14 +308,13 @@ $price:#363636;
 				text-align:left;
 			}
 			.cart-tbody .item-cart div .price {
-				font-family:'Arial', sans-serif;
 				font-size: 14px;
 				font-weight: 600;
 				line-height: 7;
-				color: $price;
+				color: $main-color;
 			}
 			.prices {
-				color:$price;
+				color:$main-color;
 				font-weight:600;
 				font-size:14px;
 			}
@@ -370,7 +376,7 @@ $price:#363636;
 						.price {
 							margin-left:10px;
 							font-family: $font-base;
-							color:$price;
+							color:#363636;
 							font-size:18px;
 							font-weight: 700;
 						}
@@ -461,7 +467,7 @@ $price:#363636;
 				position: static;
 				display: inline-block;
 				margin-bottom: 0;
-				border-radius:20px;
+				border-radius:0px;
 			}
 
 			.cart-tbody .item-cart .input_qty_pr .items-count{
@@ -476,7 +482,7 @@ $price:#363636;
 				font-weight:400;
 			}
 			button.reduced_pop.items-count.btn-minus {
-				left: 25px;
+				left: 20px;
 				font-size: 18px;
 				@media(max-width:1199px) and (min-width:992px){
 					left:0;
@@ -487,7 +493,7 @@ $price:#363636;
 				}
 			}
 			button.increase_pop.items-count.btn-plus {
-				right: 25px;
+				right: 20px;
 				font-size: 17px;
 				top: 0px;
 				@media(max-width:1199px) and (min-width:992px){
@@ -538,7 +544,7 @@ $price:#363636;
 					font-family: $font-base;
 					font-weight:600;
 					font-size:16px;
-					color:$price;
+					color:$main-color;
 					line-height: 20px;
 				}
 			}
@@ -565,15 +571,14 @@ $price:#363636;
 	outline: none;
 	-webkit-border-fit: lines;
 	border: 1px solid #f3f3f3;
-	height: 40px;
-	line-height: 40px;
-	padding: 0px 25px;
-	background: #f2f2f2;
+	height: 45px;
+	line-height: 45px;
+	padding: 0px 40px;
+	background: #f3f3f3;
 	color: #333;
-	border: solid 1px #f2f2f2;
-	font-size: 14px;
-	text-transform: uppercase;
-	font-weight: 700;
+	font-size: 16px;
+	text-transform: none;
+	font-weight: 400;
 	border-radius: 0px;
 	&:hover {
 		color:#fff;
@@ -595,20 +600,19 @@ $price:#363636;
 	-webkit-transition: all 0.3s linear;
 	padding: 0 30px;
 	height: 45px;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 45px;
-	background-color: #363636;
-	text-transform: uppercase;
-	border: solid 1px #363636;
+	background-color: $main-color;
+	text-transform: none;
+	border: solid 1px $main-color;
 	margin: 0 auto 20px;
-	font-weight: 700;
+	font-weight: 400;
 	border-radius: 0px;
 	&:hover {
 		cursor:pointer;
-		border-color:$hover;
-		color:$hover;
-		background:#fff;
-		text-decoration:none;
+		background: $text-color;
+		color: #fff;
+		border-color: $text-color;
 	}
 }
 
@@ -816,7 +820,7 @@ $price:#363636;
 		float:right;
 		.txt_center {
 			width:80px;
-			height:40px;
+			height:30px;
 			border-radius:0;
 			border:none;
 			padding-right:0;
@@ -845,7 +849,8 @@ $price:#363636;
 				border:0;
 				top:0px;
 				.fa {
-					font-size:10px;
+					font-size: 16px;
+					font-style: normal;
 				}
 				&.btn-minus {
 					left:0;

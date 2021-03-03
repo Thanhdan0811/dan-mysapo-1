@@ -2,7 +2,7 @@
 	<div class="row">
 		{% for product in collection.products %}
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 product-col">
-			<div class="item_product_main listoffice">
+			<div class="item_product_main listoffice margin-bottom-15">
 				{%include 'product_list_office'%}	
 			</div>
 		</div>			

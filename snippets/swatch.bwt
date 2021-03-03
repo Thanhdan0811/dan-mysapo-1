@@ -75,10 +75,10 @@ Set the extension of your color files below. Use 'png', 'jpeg', 'jpg' or 'gif'.
 		{%endif%}
 		{%endfor%}
 		{%if co == true%}
-		<label for="swatch-{{ option_index }}-{{ value }}" style="background-color: {{ color1}};">
+		<label for="swatch-{{ option_index }}-{{ value | handle}}" style="background-color: {{color1}};">
 		</label>
 		{%else%}
-		<label for="swatch-{{ option_index }}-{{ value }}" style="background-color: {{ value | split: ' ' | last | handle }};">
+		<label for="swatch-{{ option_index }}-{{ value | handle}}" style="background-color: {{color1}};">
 		</label>
 		{%endif%}
 

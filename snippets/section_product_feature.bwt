@@ -1,0 +1,65 @@
+<section class="section_product_feature clearfix">
+	<div class="container">
+		<div class="title_modules">
+			<h2> 
+				<a href="{{settings.url_product_feature}}" title="{{settings.title_product_feature}}">{{settings.title_product_feature}}</a>
+			</h2>
+		</div>
+		<div class="swiper_feature swiper-container">
+			<div class="swiper-wrapper">
+				{%assign count = collections[settings.url_product_feature].products_count %}
+				{%if count > 0 %}
+				{% for product in collections[settings.url_product_feature].products limit: settings.limit_product_feature %}
+				<div class="item_product_main swiper-slide">
+					{%include 'product_grid_office' %}
+				</div>
+				{%endfor %}
+
+				{%else-%}
+				<div class="col-xl-12">
+					<div class="alert alert-warning alert-dismissible show margin-bottom-0" role="alert">
+						<span>Danh mục đang cập nhật sản phẩm.</span>
+					</div>
+				</div>
+
+				{%endif %}
+			</div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		</div>
+	</div>
+</section>
+
+<script>
+	var swiper = new Swiper('.swiper_feature', {
+		slidesPerView: 4,
+		spaceBetween: 30,
+		slidesPerGroup: 2,
+		pagination: {
+			el: '.swiper-pagination',
+			clickable: true,
+		},
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+		breakpoints: {
+			300: {
+				slidesPerView: 'auto',
+				spaceBetween: 15
+			},
+			640: {
+				slidesPerView: 6,
+				spaceBetween: 15
+			},
+			768: {
+				slidesPerView: 3,
+				spaceBetween: 15
+			},
+			1024: {
+				slidesPerView: 4,
+				spaceBetween: 30
+			}
+		}
+	});
+</script>

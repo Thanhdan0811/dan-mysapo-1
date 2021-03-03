@@ -1,3 +1,7 @@
+$(window).on('popstate', function() {
+	location.reload(true);	
+});
+
 var selectedSortby;
 var tt = 'Thứ tự';
 
@@ -9,7 +13,6 @@ if(colId > 0){
 function toggleFilter(e) {
 	_toggleFilter(e);
 	renderFilterdItems();
-	resortby(selectedSortby);
 	doSearch(1);
 }
 function _toggleFilterdqdt(e) {
@@ -66,7 +69,7 @@ function renderFilterdItems() {
 		$(".filter-container__selected-filter").hide();
 }
 function addFilteredItem(name, id) {
-	var filteredItemTemplate = "<li class='filter-container__selected-filter-item' for='{3}'><a href='javascript:void(0)' onclick=\"{0}\"><i class='fa fa-close'></i> {1}</a></li>";
+	var filteredItemTemplate = "<li class='filter-container__selected-filter-item' for='{3}'><a href='javascript:void(0)' onclick=\"{0}\"><i class='fa'></i> {1}</a></li>";
 	filteredItemTemplate = filteredItemTemplate.replace("{0}", "removeFilteredItem('" + id + "')");
 	filteredItemTemplate = filteredItemTemplate.replace("{1}", name);
 	filteredItemTemplate = filteredItemTemplate.replace("{3}", id);
@@ -96,8 +99,7 @@ function doSearch(page, options) {
 			pushCurrentFilterState({sortby: selectedSortby, page: page});
 			awe_hidePopup('.loading');				  
 			awe_lazyloadImage();
-			if(window.BPR)
-				return window.BPR.initDomEls(), window.BPR.loadBadges();
+			$('.filter_container_wrap').removeClass('open');
 			$('.add_to_cart').click(function(e){
 				e.preventDefault();
 				var $this = $(this);						   
@@ -221,7 +223,7 @@ function toggleCheckbox(id) {
 }
 
 function pushCurrentFilterState(options) {
-	resortby(selectedSortby);
+
 	if(!options) options = {};
 	var url = filter.buildSearchUrl(options);
 	var queryString = url.slice(url.indexOf('?'));			  
@@ -273,21 +275,50 @@ function selectFilterByCurrentQuery() {
 	var queryString = decodeURI(window.location.search);
 	var filters = queryString.match(/\(.*?\)/g);
 
-	
 	if(queryString) {
 		isFilter = true;
-		$.urlParam = function(name){
-			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-			return results[1] || 0;
-		}
-		page = $.urlParam('page');
 	}
 	if(filters && filters.length > 0) {
 		filters.forEach(function(item) {
 			item = item.replace(/\(\(/g, "(");
-			var element = $(".aside-content input[value='" + item + "']");
-			element.attr("checked", "checked");
-			_toggleFilter(element);
+			if(item.lastIndexOf(">") >= 0){					   					  
+				var mStart1 = item.lastIndexOf("(>");
+				var mStart2 = item.lastIndexOf(" AND");
+				var mStart = item.slice(mStart1+2, mStart2);
+				var mStop1 = item.lastIndexOf("<");
+				var mStop2 = item.lastIndexOf(")");
+				var mStop = item.slice(mStop1+1, mStop2);					  
+				{%raw%}
+				$('#start input').val(Bizweb.formatMoney(Number(mStart) + 1, "{{amount_no_decimals_with_comma_separator}}₫"));
+														 $('#stop input').val(Bizweb.formatMoney(Number(mStop) - 1, "{{amount_no_decimals_with_comma_separator}}₫"));
+																								 {%endraw%}
+																								 var maxx = {{settings.filter_price_max}}/10;
+																								 var slider = $('#slider');
+
+
+																			  $('.filter-value').attr('data-value',item);
+
+									  var $element = $('.filter-value');
+				var group = 'Khoảng giá';
+				var field = 'price_min';
+				var operator = 'OR';	 
+				var value = item;	
+
+
+
+				filter.deleteValuedqdt(group, field, value, operator);
+				filter.addValue(group, field, value, operator);
+				renderFilterdItems();
+				doSearch(1);
+
+
+
+			}else{
+				var element = $(".aside-item input[value='" + item + "']");
+
+				element.attr("checked", "checked");
+				_toggleFilter(element);
+			}
 		});
 
 		isFilter = true;
@@ -305,61 +336,6 @@ function selectFilterByCurrentQuery() {
 	}
 }
 
-
-var maxx = {{settings.filter_price_max}}/10;
-var slider = $('#slider');
-if (slider ){
-	slider.slider({
-		min: '0',
-		max: maxx,
-		range: true,
-		values: [0,{{settings.filter_price_max}}],
-		slide: function(event, ui) {
-			if(ui.values[0] >= ui.values[1]) {
-				if(ui.handle == $("#slider a")[0]) {
-					$("#slider").slider("values", 1, ui.value);
-					ui.values[0] = ui.value;
-					ui.values[1] = ui.value;
-				} else {
-					$("#slider").slider("values", 0, ui.value);
-					ui.values[0] = ui.value;
-					ui.values[1] = ui.value;
-				}
-			}			
-
-			var uimax =ui.values[1]+1;	
-			{%raw%}	
-			if(ui.values[0] > 0){
-				var v1 = Bizweb.formatMoney(ui.values[0], "{{amount_no_decimals_with_comma_separator}}₫");
-											}else{
-											var v1 = ui.values[0];
-											}
-											var v2 = Bizweb.formatMoney((ui.values[1]+1), "{{amount_no_decimals_with_comma_separator}}₫");
-
-				{%endraw%}
-
-				$('#start input').val(v1);
-				$('#stop input').val(v2);
-				var uimin =ui.values[0]-1;
-				var uimax =ui.values[1]+2;
-				$('#filter-value').attr('data-value','(>'+uimin+' AND <'+uimax+')');
-			}
-		});
-		$(document).on('change','#start',function(e){
-		var val = parseInt($('#start input').val())-1;
-		var val2 = parseInt($('#stop input').val())+1;
-
-		$("#slider").slider("values",0,parseInt(val));
-		$('#filter-value').attr('data-value','(>'+val+' AND <'+val2+')');
-	});
-	$(document).on('change','#stop',function(e){
-		var val = parseInt($('#start input').val())-1;
-		var val2 = parseInt($('#stop input').val())+1;
-
-		$("#slider").slider("values",1,parseInt(val2));
-		$('#filter-value').attr('data-value','(>'+val+' AND <'+val2+')');
-	});
-}
 function getParameter(url, name) {
 	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -369,6 +345,11 @@ function getParameter(url, name) {
 
 $( document ).ready(function() {
 	selectFilterByCurrentQuery();
+	var urlx = window.location.href;
+	if (!urlx.includes('?utm')){
+		selectFilterByCurrentQuery();
+		console.log('ko co utm');
+	}
 	$('.filter-group .filter-group-title').click(function(e){
 		$(this).parent().toggleClass('active');
 	});

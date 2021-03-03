@@ -1,0 +1,16 @@
+<section class="section section_chinhsach clearfix">
+	<div class="container">
+		<div class="wrap_chinhsach serviceclide">
+			{%for cs in (1..4)%}
+			{%capture icon %}imgcs_{{cs}}{%endcapture%}
+			{%capture descs %}descs_{{cs}}{%endcapture%}
+			<div class="item">
+				<div class="itemcs">
+					<i class="fas fa-{{settings[icon]}}"></i>
+					<span>{{settings[descs]}}</span>
+				</div>
+			</div>
+			{%endfor%}
+		</div>
+	</div>
+</section>

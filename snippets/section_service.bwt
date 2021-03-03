@@ -1,0 +1,26 @@
+<div class="section_services">
+	<div class="container">
+		<div class="row">
+			{%for i in (1..4)%}
+			{%capture image%}ser_{{i}}.png{%endcapture%}
+			{%capture title%}ser_{{i}}_title{%endcapture%}
+			{%capture sum%}ser_{{i}}_sum{%endcapture%}
+			<div class="col-lg-3 col-md-3 col-sm-6 col-10 item">
+				<div class="content-service">
+					<div class="service-left">
+						<img class="lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{ image | asset_url }}" alt="{{ store.name }}"/>
+					</div>
+					<div class="service-right">
+						<div class="title-service">
+							{{settings[title]}}
+						</div>
+						<div class="service-sumary">
+							{{settings[sum]}}
+						</div>
+					</div>
+				</div>
+			</div>
+			{%endfor%}
+		</div>
+	</div>
+</div>

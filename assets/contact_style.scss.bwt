@@ -3,33 +3,49 @@
 ==============================================================================*/
 $gutter: 30px;
 $main-color: {{ settings.main-color }};
-$font-base:  "Roboto",sans-serif;
-$hover: {{ settings.hover }};
+$font-base:  -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+$hover: {{ settings.main-color }};
 $text-color: {{ settings.color_body_text }};
-$price:{{ settings.color_price }};
 
 /*Contact Page*/
 
-.left-contact{
-	@media(max-width:991px){
-		margin-bottom:30px;
-	}
-	h1{
+.page_cotact {
+	font-family: $font-base;
+	.title-head-contact {
+		color: $text-color;
+		font-size: 30px !important;
 		font-family: $font-base;
-		font-size: 15px;
+		font-weight: 700; 
+		text-transform: none;
+		position: relative;
+		display: block;
+		margin: 0;
+		padding-bottom: 10px;
+		span {
+			display: block;
+			padding: 10px 0;
+		}
+
+	}
+	p {
+		color: #8d90a6;
+	}
+	.title_db {
+		font-size: 18px !important;
 		font-weight: 700;
 		color: $text-color;
-		padding: 0px;
 		text-transform: uppercase;
-		margin-bottom: 20px;
-		margin-top: 0px;
+		position: relative;
+		display: block;
+		margin: 0;
+		padding-bottom: 0px;
+		span {
+			display: block;
+			padding: 10px 0;
+		}
 	}
-	h2{
-		font-size: 18px;
-		margin: 20px 0;
-		font-family: $font-base;
-		font-weight: 500;
-	}
+	
+	.form-signup {margin:0px;}
 }
 .page-login {
 	.title-head-contact {
@@ -38,42 +54,34 @@ $price:{{ settings.color_price }};
 		}
 	}
 }
-.page_contact{
-	margin-bottom:60px;
-}
+
 .group_contact {
 	.form-group{
 		padding:0px 15px;
 		margin-bottom:15px;
 		color:$text-color;
 		.form-control {
-			border-radius: 0 !important;
+			border-radius: 0px !important;
 			font-size:14px;
 			color:$text-color;
 			height:40px;
-			padding: 0px 20px;
-			border:1px solid #e1e1e1;
-			display: block;
-			width: 100%;
-			color: #363636;
-			background-color: #fff;
-			background-image: none;
-			margin: 0;
-			box-shadow: none;
-			&::-webkit-input-placeholder {color: #333};
-			&::-moz-placeholder {color: #333};
-			&:-ms-input-placeholder {color: #333};
+			padding: 0px 15px;
+			&::-webkit-input-placeholder {color: #acacac};
+			&::-moz-placeholder {color: #acacac};
+			&:-ms-input-placeholder {color: #acacac};
 
 		}
 		.content-area {
 			min-height:100px;
-			padding:6px 20px;
+			padding: 10px 15px;
 			border-radius: 0 !important;
+			resize: none;
 		}
 		input, textarea {
-			border-color:#e1e1e1;
+			border-color:#f7f7f7;
+			background-color: #f7f7f7;
 			&:focus {
-				border-color:#e1e1e1;
+				border-color:#f7f7f7;
 			}
 		}
 
@@ -98,22 +106,23 @@ $price:{{ settings.color_price }};
 	}
 	.btn-lienhe {
 		border-radius:0;
-		font-family: $font-base;
-		border: 1px $main-color solid;
-		background: $main-color;
-		color:#fff;
-		padding:0px 30px;
-		font-size:14px;
-		height:35px;
-		line-height:35px;
+		font-family: 'Open Sans', sans-serif;
+		border: 1px #ddd solid;
+		background: #fff;
+		color:$text-color;
+		padding:0px 12px;
 		transition: color 300ms ease-in-out 0s, background-color 300ms ease-in-out 0s, background-position 300ms ease-in-out 0s;
 		font-weight: 400;
+		text-transform: uppercase;
 		display:inline-block;
+		min-width:80px;
 		position: relative;
+		.fa {
+			margin-right:5px;
+		}
 		&:hover {
-			background:#fff;
-			color:$hover;
-			border-color:$hover;
+			background:$hover;
+			color:#fff;
 		}
 	}
 }
@@ -138,57 +147,29 @@ $price:{{ settings.color_price }};
 		margin:15px 0;
 	}
 }
-.page_contact {
-	label {
-		display: inline-block;
-		max-width: 100%;
-		font-size:14px;
-		margin-bottom: 5px;
-		font-weight: 600;
-		color:$text-color;
-		em {
-			color:red;
-		}
-	}
-	form{
-		margin:0;
-	}
-}
-/*Loaction Contact */
-.single-contact{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom:5px;
-	i{
-		float: left;
-		display: inline-block;
-		width: 30px;
-		font-size: 16px;
-		color: #363636;
-		margin-right: 5px;
-	}
-	.content{
-		font-family:$font-base;
-		font-size:14px;
-		line-height:20px;
-		word-break: break-word;
-		display: block;
-		width: calc(100% - 30px);
-		float: left;
-		font-weight: 400;
-		color: #707070;
-	}
-	a{
-		&:hover{
-			color:$hover;
-		}
-	}
-}
 .iFrameMap {
 	iframe {
 		width:100%!important;
-		height:457px;
-		display:block;
+		height:450px;
+	}
+}
+.title-head-contact {
+	color: #000;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 22px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-top: 0px;
+}
+.page_contact {
+	padding-bottom:40px;
+	label {
+		display: inline-block;
+		max-width: 100%;
+		margin-bottom: 5px;
+		font-weight: 700;
+		em {
+			color:red;
+		}
 	}
 }

@@ -16,6 +16,7 @@
 {%endif%}
 {% endfor%}
 
+
 {% include 'breadcrumb' %} 
 <section class="product details-main" itemscope itemtype="https://schema.org/Product">	
 	<meta itemprop="url" content="{{ store.url }}{{ product.url }}">
@@ -78,9 +79,8 @@
 			<div class="section wrap-padding-15 wp_product_main">
 				<div class="details-product section">
 					<div class="row ">
-						<div class="product-detail-left product-images col-xs-12 col-sm-12 col-md-6 col-lg-5 ">
+						<div class="product-detail-left product-images col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
 							<div class="{% if product.images.size > 1 and settings.product_thumb_enable%}col_large_default{% else %}col_large_full{% endif %} large-image">
-
 								{%if product.images.size > 0%}
 								<a {%if settings.product_lightbox_enable%} href="{{ product.featured_image.src | img_url:'1024x1024' }}" data-rel="prettyPhoto[product-gallery]" {%else%} href="javascript:;"{%endif%}>
 									{% assign featured_image_alt = product.featured_image.alt | default: product.name %}
@@ -100,35 +100,34 @@
 									{% assign alt = image.alt | default: product.name%}
 									{%endif%}
 									<div class="item">
-										<a href="{{ image.src }}" title="{{alt}}" data-image="{{ image.src }}" data-zoom-image="{{ image.src }}" {%if settings.product_lightbox_enable%} data-rel="prettyPhoto[product-gallery]" {%endif%}>	
+										<a href="{{ image.src }}" title="{{alt}}" data-image="{{ image.src | img_url:'medium' }}" data-zoom-image="{{ image.src }}" {%if settings.product_lightbox_enable%} data-rel="prettyPhoto[product-gallery]" {%endif%}>	
 										</a>
 									</div>	
 									{% endfor %}
 								</div>
-								
-								{% assign name = product.collections | join: ""%}
-								{% if name contains "freeship" %} 
-									<img src="{{ 'freeship.png' | asset_url }}" alt="freeship" style="position: absolute;z-index: 1;top: 0;left: 0;height: 100%;width: 100%;"/>
-								{% endif %}
-							
-							
-							
 							</div>
 							{%if product.images.size  > 1 and settings.product_thumb_enable%}
 							<div class="section slickthumb_relative_product_1">
-								<div id="gallery_02" class="slickproduct thumb_product_details">
-									{% for image in product.images %}
-									<div class="item">
-										<a href="javascript:void(0)"  data-zoom-image="{{ image.src | img_url: '1024x1024' }}">
-											<img class="lazyload" data-img="{{ image.src | img_url:'1024x1024' }}" src="{{'rolling.svg' | asset_url}}" data-src="{{ image.src | img_url:'small' }}" alt="{{ image.alt | default:product.name}}">
-										</a>
+								<div id="gallery_02" class="swiper-container slickproduct thumb_product_details">
+									<div class="swiper-wrapper">
+										{% for image in product.images %}
+										<div class="item swiper-slide">
+											<a href="javascript:void(0)"  data-zoom-image="{{ image.src | img_url: '1024x1024' }}">
+												<img class="lazyload" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" data-src="{{ image.src | img_url:'small'}}" alt="{{ product.name | escape}}" data-image="{{ image.src | img_url:'1024x1024'}}" />
+											</a>
+										</div>
+										{% endfor %}
 									</div>
-									{% endfor %}
+									{%comment%}
+									<div class="swiper-button-prev"></div>
+									<div class="swiper-button-next"></div>
+									{%endcomment%}
 								</div>
+
 							</div>
 							{%endif%}
 						</div>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 details-pro">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 details-pro">
 							<h1 class="title-product">{{ product.name }}</h1>
 							<div class="group-status">
 								<span class="first_status">Thương hiệu:<span class="status_name">
@@ -140,6 +139,20 @@
 									</span>
 									<span class="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
 								</span>
+								<span class="first_status">
+									Mã SKU:
+									<span class="status_name product-sku" itemprop="sku" content="{% if product.selected_or_first_available_variant.sku != "" and product.selected_or_first_available_variant.sku != null %}
+																					  {{ product.selected_or_first_available_variant.sku }}
+																					  {% elsif product.sku != "" and product.sku != null %}
+																					  {% else %}Đang cập nhật{% endif %}">
+										{% if product.selected_or_first_available_variant.sku != "" and product.selected_or_first_available_variant.sku != null %}{{ product.selected_or_first_available_variant.sku }}
+										{% elsif product.sku != "" and product.sku != null %}
+										{% else %}Đang cập nhật
+										{% endif %}
+									</span>
+								</span>
+
+								<span class="line">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
 								<span class="first_status status_2">
 									Tình trạng: 
 									{% if on_var %} 
@@ -175,8 +188,9 @@
 									{%endif%}
 								</span>
 							</div>
-							{%if settings.product_tab3_enable%}
+							{%if settings.use_reviews%}
 							<div class="danhgiasao">
+								<span class="text_bold">Đánh giá:</span>
 								<div class="sapo-product-reviews-badge" data-id="{{ product.id }}"></div>
 								<span class="danhgiasp"><i class="fa fa-edit"></i><a href="#" onclick="scrollToxx();">&nbsp;Viết đánh giá của bạn</a></span>
 							</div>
@@ -205,15 +219,6 @@
 								</div> <!-- Giá -->
 								{% endif %}
 							</div>
-							{%comment kiểm tra sticker giao nhanh 24h%}
-							{% endcomment %}
-							
-							
-							{% if product.tags contains "giaonhanh24h" %} 
-								<img src="{{ 'sticky-giao-nhanh.png' | asset_url }}" alt="giao nhanh 24h"/>
-							{% endif %}
-							
-							
 							{%if settings.user_product_sumary%}
 							<div class="product-summary">
 								<div class="rte">
@@ -258,7 +263,7 @@
 										<div class="button_actions clearfix">
 											{% if product.available %}
 											<button type="submit" class="btn btn_base btn_add_cart btn-cart add_to_cart">
-												<span class="text_1">Thêm vào giỏ hàng</span>
+												<span class="text_1">Mua sản phẩm</span>
 											</button>									
 											{% else %}
 											<button class="btn btn_base btn_dis btn-cart" disabled="disabled" >
@@ -345,17 +350,17 @@
 					{% assign productRelate = product.collections.first.alias %}
 					{% assign productRelateCheck = product.collections.size %}
 					{% assign productRelateCheck2 = product.collections.first.products_count %}	
-					<div class="section_prd_feature" id="sidebarproduct">
+					<div class="section_prd_feature swiper-container swiper_related" id="sidebarproduct">
 						<div class="title_module section">
 							<h2 class="bf_flower">
 								<a href="/{{ productRelate | handleize }}" title="{{ settings.sanphamlienquan_title }}">{{ settings.sanphamlienquan_title }}</a>
 							</h2>
 						</div>
 						{% if productRelateCheck > 0 and productRelateCheck2 > 1  %}
-						<div class=" section products product_related slick-product slickrelated">
+						<div class=" section products product_related swiper-wrapper">
 							{% for product in collections[productRelate]products limit: settings.limit_sanphamlienquan%}
 							{%unless check11 == product.url%}
-							<div class="item">
+							<div class="item swiper-slide">
 								<div class="item_product_main">
 									{% include 'product_grid_office' %}
 								</div>
@@ -385,6 +390,38 @@
 
 <script> 
 
+	var formProduct = $('.form-product');
+	//check storage
+	{%if product.variants.size <= 1%}
+	var variantId = "{{ product.variants[0].id }}";
+	$(document).on('click', ".btn_num", function () {
+		$(this).parent().children('.btn_num').prop('disabled', false);
+		var variant = "{{ product.variants[0].id }}",
+		qtyCount =  $(this).parent().children('.prd_quantity').val(),
+			maxQuanty = "{{product.selected_or_first_available_variant.inventory_quantity}}",
+			maxS = maxQuanty,
+				allow = "{{product.selected_or_first_available_variant.inventory_management}}",
+				continues = "{{product.selected_or_first_available_variant.inventory_policy}}";
+				if (allow == 'bizweb'){
+					formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");
+					if (continues == "deny") {
+						formProduct.find('.btn_num.btn-plus').css("pointer-events","none");
+						if (qtyCount >= maxS) {
+							alert('Bạn chỉ có thể mua tối đa '+ maxS);
+							$('.prd_quantity').val(maxS);
+						}else {
+							formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");
+						}
+					} else if (continues == "continue") {
+						//console.log(maxS, 'da max nhung duoc mua tiep');
+						formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");
+					} else{
+						formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");
+					}
+				}
+	}) 
+	{%endif%}
+	//end
 
 
 
@@ -404,7 +441,28 @@
 	}
 
 	var selectCallback = function(variant, selector) {
-
+		//check storage
+		//debugger;
+		// Kiểm tra xem có phiên bản của sản phẩm hay không, nếu không có cho ẩn đi.
+		if(!variant) {
+			$('.form_product_content').addClass('hidden');
+			return;
+		} else {
+			$('.form_product_content').removeClass('hidden');
+		}
+		//
+		var varianId = variant.id;
+		$('.prd_quantity').val('1');
+		$('.form-product').find('.btn_num.btn-plus').css("pointer-events","auto");
+		CheckQtyDetail(variant, varianId, 1);
+		$(document).on('click', ".btn_num", function () {
+			$(this).parent().children('.btn_num').prop('disabled', false);
+			var varId = ""+varianId+"",
+				qtyCount =  $(this).parent().children('.prd_quantity').val(),
+				maxQuanty = varianId.inventory_quantity;
+			CheckQtyDetail(variant, varianId, qtyCount, maxQuanty);
+		}) 
+		//end
 
 		if (variant) {
 
@@ -423,7 +481,7 @@
 			group = jQuery('.form_product_content'),
 			form = jQuery('.form-product .button_actions'),
 			form2 = jQuery('.soluong'),
-			product_sku = jQuery('.details-pro .product_sku .status_name'),
+			product_sku = jQuery('.details-pro .product-sku'),
 			productPrice = jQuery('.details-pro .special-price .product-price'),
 			qty = jQuery('.first_status .availabel'),
 			sale = jQuery('.details-pro .old-price .product-price-old'),
@@ -431,11 +489,11 @@
 			vat = jQuery('.form-group .vat');
 
 		/* SKU */
-		if (variant && variant.sku != "" && variant.sku != null) {
+		if (variant && variant.sku != "" && variant.sku != null){
 			product_sku.html(variant.sku);
 		} else {
 			product_sku.html('Đang cập nhật');
-		}
+		};
 		/*** VAT ***/
 		if (variant){
 			if (variant.taxable){
@@ -457,7 +515,7 @@
 			}
 
 			group.removeClass('hidden');
-			addToCart.html('<span class="text_1">Thêm vào giỏ hàng</span>').removeAttr('disabled');	
+			addToCart.html('<span class="text_1">Mua sản phẩm</span>').removeAttr('disabled');	
 			if(variant.price == 0){
 				productPrice.html('Liên hệ');	
 				comparePrice.hide();
@@ -532,7 +590,7 @@
 		form2.addClass('hidden');
 		group.removeClass('hidden');
 		vat.removeClass('hidden');
-
+		
 		if(variant){
 			if(variant.price != 0){
 				form.removeClass('hidden');
@@ -582,6 +640,7 @@
 			comparePrice.hide();
 			form.addClass('hidden');	
 			sale.removeClass('sale');
+			group.addClass('hidden');
 		}
 	}else{
 		productPrice.html('Liên hệ');	
@@ -590,7 +649,7 @@
 		comparePrice.hide();
 		form.addClass('hidden');	
 		sale.removeClass('sale');
-	}
+	}	
 	}
 	/*begin variant image*/
 	if (variant && variant.image) {  
@@ -639,6 +698,9 @@
 
 	} 
 	};
+
+
+
 	jQuery(function($) {
 		{% if  product.variants.size > 1 %}
 		if(navigator.userAgent.indexOf("Speed Insights") == -1) {
@@ -793,6 +855,39 @@
 		});    
 	});
 
+
+	//Check storage
+	function CheckQtyDetail(variant, varianId, qtyCount) {
+		if (variant) {
+			if (variant.id == varianId) {
+				var maxS = variant.inventory_quantity,
+					allow = variant.inventory_management,
+					continues = variant.inventory_policy;
+				//console.log(maxS, allow, continues, varianId, ',max - allow - continues - variantId');
+				if (allow == 'bizweb'){
+					formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");
+					if (continues == "deny") {
+						formProduct.find('.btn_num.btn-plus').css("pointer-events","none");
+						if (qtyCount >= maxS) {
+							// bỏ alert khi sản phẩm hết hàng trong kho
+							//alert('Bạn chỉ có thể mua tối đa ' + maxS);
+							$('.prd_quantity').val(maxS);
+						}else {
+							formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");
+						}
+					} else if (continues == "continue") {
+						//console.log(maxS, 'da max nhung duoc mua tiep');
+						formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");
+					} else{
+						formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");
+					}
+				}
+			}
+		} 
+	}
+	//endcheck
+
+
 </script>
 
 <script>
@@ -809,104 +904,82 @@
 
 
 	$(document).ready(function (e) {
-
-
-
-		var wDW = $(window).width();
-		$('#gallery_02').slick({
-			autoplay: false,
-			autoplaySpeed: 6000,
-			dots: false,
-			arrows: true,
-			infinite: false,
-			speed: 300,
-			slidesToShow: 5,
-			slidesToScroll: 5,
-			responsive: [
-				{
-					breakpoint: 1200,
-					settings: {
-						slidesToShow: 5,
-						slidesToScroll: 5
-					}
+		var galleryThumbs = new Swiper('#gallery_02', {
+			spaceBetween: 0,
+			slidesPerView: 4,
+			freeMode: true,
+			lazy: true,
+			watchSlidesVisibility: true,
+			watchSlidesProgress: true,
+			hashNavigation: true,
+			direction: 'vertical',
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			breakpoints: {
+				300: {
+					slidesPerView: 3,
+					spaceBetween: 10,
 				},
-				{
-					breakpoint: 1024,
-					settings: {
-						slidesToShow: 4,
-						slidesToScroll: 3
-					}
+				425: {
+					slidesPerView: 4,
+					spaceBetween: 10,
 				},
-				{
-					breakpoint: 991,
-					settings: {
-						slidesToShow: 4,
-						slidesToScroll: 4
-					}
+				640: {
+					slidesPerView: 4,
+					spaceBetween: 10,
 				},
-				{
-					breakpoint: 767,
-					settings: {
-						slidesToShow: 4,
-						slidesToScroll: 4
-					}
+				768: {
+					slidesPerView: 5,
+					spaceBetween: 10,
 				},
-				{
-					breakpoint: 475,
-					settings: {
-						slidesToShow: 3,
-						slidesToScroll: 3
-					}
-				}
-			]
-		});
-		$('.slickrelated').slick({
-			autoplay: false,
-			autoplaySpeed: 6000,
-			dots: false,
-			arrows: true,
-			infinite: false,
-			speed: 300,
-			slidesToShow: 4,
-			slidesToScroll: 4,
-			responsive: [
-				{
-					breakpoint: 1200,
-					settings: {
-						slidesToShow: 4,
-						slidesToScroll: 4
-					}
+				1024: {
+					slidesPerView: 4,
+					spaceBetween: 0,
 				},
-				{
-					breakpoint: 1024,
-					settings: {
-						slidesToShow: 4,
-						slidesToScroll: 4
-					}
-				},
-				{
-					breakpoint: 991,
-					settings: {
-						slidesToShow: 3,
-						slidesToScroll: 1
-					}
-				},
-				{
-					breakpoint: 767,
-					settings: {
-						slidesToShow: 2,
-						slidesToScroll: 2
-					}
-				}
-			]
+			}
 		});
 
-
-
+		var galleryThumbs = new Swiper('.swiper_related', {
+			spaceBetween: 30,
+			slidesPerView: 5,
+			freeMode: true,
+			lazy: true,
+			watchSlidesVisibility: true,
+			watchSlidesProgress: true,
+			hashNavigation: true,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			breakpoints: {
+				300: {
+					slidesPerView: 2,
+					spaceBetween: 15,
+				},
+				500: {
+					slidesPerView: 2,
+					spaceBetween: 15,
+				},
+				640: {
+					slidesPerView: 2,
+					spaceBetween: 15,
+				},
+				768: {
+					slidesPerView: 3,
+					spaceBetween: 15,
+				},
+				1024: {
+					slidesPerView: 5,
+					spaceBetween: 30,
+				},
+			}
+		});
 
 		$('#gallery_02 img, .swatch-element label').click(function(e){
 			e.preventDefault();
-			var ths = $(this).attr('data-img');
+			var ths = $(this).attr('data-image');
 			$('.large-image .checkurl').attr('src', ths);
 
 			$('.large-image .checkurl img').attr('src', ths);
@@ -934,7 +1007,6 @@
 		})
 
 	});
-
 
 
 </script>

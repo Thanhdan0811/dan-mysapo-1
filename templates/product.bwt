@@ -443,6 +443,14 @@
 	var selectCallback = function(variant, selector) {
 		//check storage
 		//debugger;
+		// Kiểm tra xem có phiên bản của sản phẩm hay không, nếu không có cho ẩn đi.
+		if(!variant) {
+			$('.form_product_content').addClass('hidden');
+			return;
+		} else {
+			$('.form_product_content').removeClass('hidden');
+		}
+		//
 		var varianId = variant.id;
 		$('.prd_quantity').val('1');
 		$('.form-product').find('.btn_num.btn-plus').css("pointer-events","auto");
@@ -861,7 +869,8 @@
 					if (continues == "deny") {
 						formProduct.find('.btn_num.btn-plus').css("pointer-events","none");
 						if (qtyCount >= maxS) {
-							alert('Bạn chỉ có thể mua tối đa ' + maxS);
+							// bỏ alert khi sản phẩm hết hàng trong kho
+							//alert('Bạn chỉ có thể mua tối đa ' + maxS);
 							$('.prd_quantity').val(maxS);
 						}else {
 							formProduct.find('.btn_num.btn-plus').css("pointer-events","auto");

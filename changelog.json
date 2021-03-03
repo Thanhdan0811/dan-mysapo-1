@@ -1,6 +1,13 @@
 {
     "name": "sapo-theme-zendo",
     "versions": {
+        
+        "v2.1.0" : [
+          "templates/collection.bwt",
+          "assets/aside-filter-css.css",
+          "snippets/aside-filter.bwt",
+          "snippets/aside-filter-1.bwt"
+        ],
         "v2.0.0" : [
           "templates/product.bwt"
         ],

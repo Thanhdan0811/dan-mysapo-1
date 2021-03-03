@@ -1,0 +1,114 @@
+{{ 'aside-filter-css.css' | asset_url | stylesheet_tag }}
+<div class="filter-container filter-container-custom">
+        <p class="title">Lọc Theo</p>
+		<!-- Lọc theo hãng -->
+		{% if settings.filter_vendor %}
+		{%assign vendors = collection.all_vendors.size%}
+		{%if vendors > 1%}
+        <div class="filter-item-custom">
+            <span>{{settings.filter_vendor_title}}</span>
+            <ul>
+				{% for vendor in collection.all_vendors %}
+					{%if vendor != ''%}
+				
+                <li class="filter-item--check-box">
+					<label for="filter-{{ vendor | handleize }}">
+						<input type="checkbox" id="filter-{{ vendor | handleize }}"  data-group="PRODUCT_VENDOR" data-field="vendor.filter_key" data-text="{{ vendor.filter_key }}" value="(&#34;{{ vendor }}&#34;)" data-operator="OR">
+						<i class="fa"></i>
+						{{ vendor }}
+					</label>
+                </li>
+				{%endif%}
+				{% endfor %}
+            </ul>
+        </div>
+		{%endif%}
+		{%endif%}
+		<!-- lọc theo loại -->
+		{% if settings.filter_type %}
+		{%assign typers = collection.all_types.size%}
+		{%if typers > 1%}
+		<div class="filter-item-custom">
+			<span>{{settings.filter_type_title}}</span>
+			<ul>
+				{% for type in collection.all_types %}
+				{%if type != ''%}
+				<li class="filter-item--check-box">
+					<span>
+						<label for="filter-{{ type | handleize }}">
+							<input type="checkbox" id="filter-{{ type | handleize }}"  data-group="PRODUCT_TYPE" data-field="product_type.filter_key" data-text="{{ product_type.filter_key }}" value="(&#34;{{ type }}&#34;)" data-operator="OR">
+							<i class="fa"></i>
+							{{ type }}
+						</label>
+					</span>
+				</li>
+				{%endif%}
+				{% endfor %}
+			</ul>
+		</div>
+		{%endif%}
+		{%endif%}
+		<!-- Lọc theo Tag (Màu sắc)-->
+		{%- if settings.filter_tag1 -%}
+		{%-if settings.filter_tag1_style == 'input'-%}
+		<div class="filter-item-custom">
+			<span>{{settings.filter_tag1_title}}</span>
+			<ul>
+				{%- assign tags = settings.filter_tag1_list | split: ';' -%} 
+					{%- for t in tags -%}
+					{%- assign tag = t | strip -%}
+					{%- assign tag_value = tag | handleize -%}
+					<li class="filter-item filter-item--check-box filter-item--green">
+						<span>
+							<label for="filter-{{ tag | handleize }}">
+								<input type="checkbox" id="filter-{{ tag | handleize }}" data-group="tag1" data-field="tags" data-text="{{tag}}" value="({{tag}})" data-operator="OR">
+								<i class="fa"></i>
+								{{tag}}
+							</label>
+						</span>
+					</li>	
+					{%-endfor-%}
+			</ul>
+		</div>
+		{%-else-%}
+		<div class="filter-item-custom">
+			<span>{{settings.filter_tag1_title}}</span>
+			<ul>
+				{%- assign tags = settings.filter_tag1_list | split: ';' -%} 
+					{%- assign color_list = settings.filter_tag1_list_color | split:";" -%}
+
+					{%- for t in tags -%}
+					{%-assign fl1 = forloop.index-%}
+					{%-for color in color_list-%}
+					{%-if forloop.index == fl1-%}
+					{%-assign cl = color-%}
+					{%-endif-%}
+					{%-endfor-%}
+					{%- assign tag = t | strip -%}
+					{%- assign tag_value = tag | handleize -%}
+					<li class="filter-item color filter-item--check-box filter-item--green">
+						<span>
+							<label for="filter-{{ tag | handleize }}">
+								<input type="checkbox" id="filter-{{ tag | handleize }}"  data-group="tag1" data-field="tags" data-text="{{tag}}" value="({{tag}})" data-operator="OR">
+								<i class="fa {{ tag | handleize }}" style="background-color:{{cl}};{%-if tag_value == 'trang'-%}border:1px solid #ebebeb;{%-endif-%}"></i>
+								{{tag}}
+							</label>
+						</span>
+					</li>	
+					{%-endfor-%}
+			</ul>
+		</div>
+		{%-endif-%}
+		{%-endif-%}
+</div>
+<div class="filter-container__selected-filter" style="display: none;">
+	<div class="filter-container__selected-filter-header clearfix">
+		<span class="filter-container__selected-filter-header-title"><i class="fa fa-arrow-left hidden-sm-up"></i> Bạn chọn</span>
+		
+	</div>
+	<div class="filter-container__selected-filter-list">
+		<ul></ul>
+		<a href="javascript:void(0)" onclick="clearAllFiltered()" class="filter-container__clear-all">X Bỏ hết</a>
+	</div>
+	
+</div>

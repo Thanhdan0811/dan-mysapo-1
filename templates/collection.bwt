@@ -5,14 +5,20 @@
 			<div class="row">
 				<aside class="dqdt-sidebar sidebar left-content col-lg-3 col-md-4 col-sm-4">
 					<div class="wrap_background_aside asidecollection">
-						{%include 'aside-collection'%}
+						{%include 'aside-collection'%}	
 					</div>
 				</aside>
 				<div class="main_container collection col-lg-9 col-md-12 col-sm-12">
 					<h1 class="collectiontitle">{%if collection.name == 'All'%}Tất cả sản phẩm{%else%}{{ collection.name }}{%endif%}</h1>
+					
+					
+					{%include 'aside-filter-1'%}
+					
+					
 					<div class="category-products products">
 						{% if collection.products.size > 0 %}
 						<div class="section">
+							
 							{%include 'collection-sortby'%}
 						</div>
 						{%endif%}

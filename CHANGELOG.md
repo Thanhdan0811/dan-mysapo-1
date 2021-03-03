@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## v2.1.0
+   
+- Add horizontal filter into collection all page.ss
+
 ## v2.0.0
 
 - Change to base theme

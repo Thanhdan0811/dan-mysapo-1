@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## v2.0.0
+
+- Change to base theme
+- Add new product with variants
+
 ## v1.1.0
 
 - implement freeship collection 

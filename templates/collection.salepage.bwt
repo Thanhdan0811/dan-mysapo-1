@@ -1,0 +1,130 @@
+{{ 'salepage-collection.css' | asset_url | stylesheet_tag }}
+<div class="section wrap_background"> 
+	{% include 'breadcrumb' %}
+	<div class="container ">
+		<!-- product type -->
+        <div class="products-type">
+			{% for type in collection.all_types%}
+            <div class="type-item">
+                {{type | link_to_type}}
+            </div>
+			{% endfor %}
+        </div>
+        <!-- Description -->
+        <div class="calculation">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, nisi.</p>
+        </div>
+        <!-- products-gallery -->
+        <div class="row gallery-products">
+			{% paginate collection.products by paginate.items %}
+			{% assign temp = paginate.items %}
+			{% for product in collection.products %}
+				<!-- item -->
+				<div class="col-3 item">
+						<div class="products-item">
+							<a href="{{ product.url }}" style="display: block">
+								<div class="products-img">
+									<img src="{{product.images[0].src}}" alt="sp">
+									<img class="img-hover" src="{{product.images[1].src}}" alt="sp">
+								</div>
+							</a>
+							<div class="products-variant">
+								<a class="variant-item" >
+									<span></span>
+								</a>
+								<a class="variant-item" >
+									<span></span>
+								</a>
+								<a class="variant-item" >
+									<span></span>
+								</a>
+								<a class="variant-item" >
+									<span></span>
+								</a>
+							</div>
+							<div class="products-desc">
+								<a href="{{ product.url }}" class="title">{{product.name}}</a>
+								<p class="price">{{product.price}}đ</p>
+							</div>
+						</div>
+				</div>
+			{% endfor %}
+			{% endpaginate %}
+        </div>
+		
+	</div>
+
+	<script>
+		var colName = "{%if page_title == 'All'%}Tất cả sản phẩm{%else%}{{ page_title }}{%endif%}";
+		{% if collection.id > 0 %}
+		var colId = {{collection.id}};
+		{%else%}
+		var colId = 0;
+		{%endif%}
+
+		var selectedViewData = "{% if template contains '.list' %}data_list{% else %}data{% endif %}";
+		
+		let promise = fetch("https://nguyen-thanh-dan.mysapo.net/admin/products.json?collection_id={{collection.id}}&limit=5&page=1",)
+    	
+		let totalPages = 0;
+		
+							
+		fetch("/admin/products/count.json?collection_id=2507525").
+		then(res => {
+			return res.json()
+		}).then(res => {
+			totalPages = Math.ceil(res.count / 5);
+			return totalPages;
+		}).then(res => {
+			fetch("/admin/products.json?collection_id={{collection.id}}&limit=5&page=1",)
+			.then(res => {
+				
+				return res.json();
+			})
+			.then(res => {
+				console.log(res, totalPages)
+				//document.querySelector(".gallery-products")
+				let content = "";
+				for(let product of res.products) {
+					content += `
+							<div class="col-3 item">
+								<div class="products-item">
+									<a href="${product.url}" style="display: block">
+										<div class="products-img">
+											<img src="${product.images[0].src}" alt="sp">
+											<img class="img-hover" src="${product.images[1].src}" alt="sp">
+										</div>
+									</a>
+									<div class="products-variant">
+										<a class="variant-item" >
+											<span></span>
+										</a>
+										<a class="variant-item" >
+											<span></span>
+										</a>
+										<a class="variant-item" >
+											<span></span>
+										</a>
+										<a class="variant-item" >
+											<span></span>
+										</a>
+									</div>
+									<div class="products-desc">
+										<a href="${ product.url }" class="title">${product.name}</a>
+										<p class="price">${product.price}đ</p>
+									</div>
+								</div>
+							</div>
+					`
+				}
+				console.log(content)
+				//document.querySelector(".gallery-products").innerHTML = content;
+			})
+		})
+		
+		
+		
+		
+		
+	</script>
+</div>

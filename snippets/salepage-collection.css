@@ -1,0 +1,116 @@
+.products-type {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.products-type .type-item {
+    margin-right: 5px;
+}
+.products-type .type-item a{
+    display: inline-block;
+    min-width: 130px;
+    padding: 5px 20px;
+
+    background: #dcdcdc;
+    color: #252a2b;
+    
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+}
+.products-type .type-item a:hover,
+.products-type .type-item a.active {
+    background: #ef3634;
+    color: white;
+    font-weight: bold;
+}
+
+/* Calculation */
+.calculation {
+    text-align: center;
+    margin:0 0 15px 0 ;
+}
+
+/* gallery product */
+.gallery-products .item {
+    height: 459px;
+}
+.gallery-products .products-item {
+    transition: all 0.3s;
+}
+.gallery-products .products-item:hover {
+    -webkit-box-shadow: 0 0 2px 0px #ccc;
+}
+.gallery-products .products-item .products-img {
+    cursor: pointer;
+    position: relative;
+}
+.gallery-products .products-item .products-img img{
+    display: block;
+    width: 100%;
+}
+.gallery-products .products-item .products-img .img-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.gallery-products .products-item .products-img:hover .img-hover {
+    z-index: 1;
+}
+.gallery-products .variant-item {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30px;
+    height: 30px;
+    padding: 1px;
+
+    border-radius: 100%;
+    cursor: pointer;
+}
+.gallery-products .variant-item.active,
+.gallery-products .variant-item:hover {
+    border: 1px solid black;
+}
+.gallery-products .products-variant {
+    text-align: center;
+    margin-top: 10px;
+}
+.gallery-products .variant-item img {
+    display: inline-block;
+    width: 100%;
+    border-radius: 100%;
+}
+.gallery-products .variant-item span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: red;
+    border-radius: 100%;
+}
+.products-desc { 
+    text-align: center;
+    padding: 10px;
+}
+.products-desc .title{
+    line-height: 20px;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    font-size: 14px;
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    margin-bottom: 0;
+}
+.products-desc .price {
+    font-weight: bold;
+    padding-bottom: 0;
+    margin-bottom: 10px;
+}

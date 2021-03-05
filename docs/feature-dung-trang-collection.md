@@ -10,8 +10,9 @@
 - Hoàn thành dựng layout và reponsive.
 - Chưa hoàn thành : các hàm chức năng.
 
-- Ý tưởng ban đầu là tạo 1 trang hoàn toàn mới là collection.salepage.bwt dùng file salepage-collection.css để css.
-- Nhưng gặp khó khăn về vấn đề load products và nút hiển thị thêm sản phẩm do chưa biết cách dùng liquid để tìm ra giải pháp.
-- 2 File product_grid_office_1.bwt, product_grid_office_1_css.css được tạo với mục đích là làm giống như trang sản phẩm cũ.
 
-- Hiện vẫn đang chưa tìm được cách load products và nút mở rộng.
+- Hiện vẫn đang chưa tìm được cách filter products và nút mở rộng.
+
+Ý tưởng cho các chức năng 
+- Filter : lấy tên tag hay type cần filter và id collection sau đó gọi api theo collection và type, dùng javascript để ghi đè HTML.
+- show more : lấy danh sách sản phẩm theo collection và filter và phân trang. mỗi lần click sẽ gọi api của trang tiếp theo.
